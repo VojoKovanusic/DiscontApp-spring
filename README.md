@@ -4,9 +4,13 @@ Povezivanje Rest Spring boot app sa angularom, preko zadatka koji je glasio:
 
 Overview
 For this exam you will be building a backend for a new feature of the Discount Ascii Warehouse ecommerce platform.
-Your application will produce a list of "Popular purchases", so customers can see who else bought the same products as them. To complete the exam your application will need to accept HTTP requests to /api/recent_purchases/:username and respond with a list of recently purchased products, and the names of other users who recently purchased them.
+Your application will produce a list of "Popular purchases", so customers can see who else bought the same products as them. 
+To complete the exam your application will need to accept HTTP requests to /api/recent_purchases/:username and respond with a list of recently purchased products, and the names of other users who recently purchased them.
+
 There is no frontend component to this exam, you're just building the backend.
-Other requirements
+
+<strong>Other requirements</strong>
+
 ●	your application must cache API requests so that it can respond as quickly as possible.
 ●	if a username is provided that cannot be found, the API should respond with "User with username of '{{username}}' was not found"
 Where does the data come from?
