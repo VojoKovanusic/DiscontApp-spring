@@ -1,0 +1,33 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+
+import { AppComponent } from './app.component';
+
+import { ListPurchasComponent } from './list-purchas/list-purchas.component';
+import { Routes, RouterModule } from '@angular/router'
+import { PurchaseService } from './service/purchase.service'
+import { HttpModule } from '@angular/http'
+import { FormsModule } from '@angular/forms';
+import { PurchaseByUsernameComponent } from './purchase-by-username/purchase-by-username.component';
+
+const appRoutes: Routes = [
+  { path: '', component: ListPurchasComponent },
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ListPurchasComponent,
+    PurchaseByUsernameComponent,
+
+  ],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
+  ],
+  providers: [PurchaseService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

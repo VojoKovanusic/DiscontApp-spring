@@ -1,0 +1,29 @@
+<div class="container">
+  <form>
+    <p>Enter product ID:</p>
+    <input type="number" name="id" [(ngModel)]="id">
+    <button class="Submit" (click)="getPurchasesById()">Search</button>
+    
+    <div *ngIf="!isEmptu()">
+      <table class="table table-striped">
+        <thead>
+          <th>Id</th>
+          <th>Username</th>
+          <th>Product Id</th>
+          <th>Date</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let purchase of purchases">
+            <td>{{purchase.id}}</td>
+            <td>{{purchase.username}}</td>
+            <td>{{purchase.productId}}</td>
+            <td>{{purchase.date}}</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+  </form>
+</div>
+
