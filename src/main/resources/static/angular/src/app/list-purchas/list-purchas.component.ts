@@ -10,9 +10,8 @@ import { error } from 'selenium-webdriver';
 })
 export class ListPurchasComponent {
   private purchases: Purchas[]=[];
-  @Input("id") id: number;
+  @Input("userName") userName: string;
   
-
   constructor(private service: PurchaseService) { }
 
   getPurchasesById() {

@@ -14,7 +14,6 @@ export class PurchaseService {
   private options= new RequestOptions({headers: this.headers});
   constructor(private http:Http) { }
  
-
   allPurchasesByUser(userName:string){
   return this.http.get(this.baseUrl+'/purchases/by_user/'+userName, this.options).map((response:Response)=>response.json()).
   catch(this.errorHendler);}

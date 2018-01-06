@@ -19,7 +19,8 @@ export class PurchaseByUsernameComponent  {
     return this.service.allPurchasesByUser(this.userName)
     .subscribe(purchases => {
       this.purchases = purchases
-    },
+    }
+    ,
       error => { console.log(error) });
   }
   isEmptu(){

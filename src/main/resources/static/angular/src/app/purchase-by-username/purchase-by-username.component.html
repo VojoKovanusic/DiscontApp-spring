@@ -2,9 +2,9 @@
     <form>
       <p>Enter user name:</p>
       <input type="text" name="userName" [(ngModel)]="userName">
-      <button class="Submit" (click)="getPurchasesByUserName()">Search</button>
+      <button  class="btn btn-primary btn-sm" (click)="getPurchasesByUserName()">Search</button>
       
-      <div *ngIf="!isEmptu()">
+      <div class="table-responsive" *ngIf="!isEmptu()">
         <table class="table table-striped">
           <thead>
             <th>Id</th>

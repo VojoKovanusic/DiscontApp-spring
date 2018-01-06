@@ -1,0 +1,29 @@
+<div class class="container">
+  <form>
+    <p>Enter product ID:</p>
+    <input type="number" name="id" [(ngModel)]="id">
+
+    <button class="Submit" (click)="getProductByID()">Search</button>
+
+    <table class="table table-striped" *ngIf="products.length >0">
+
+      <thead>
+        <th>productId</th>
+        <th>face</th>
+        <th>price</th>
+        <th>size</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products"> 
+        <td>{{product.id}}</td>
+        <td>{{product.face}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.size}}</td>
+        </tr>
+      </tbody>
+
+
+    </table>
+  </form>
+
+</div>

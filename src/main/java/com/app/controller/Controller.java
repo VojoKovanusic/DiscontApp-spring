@@ -65,7 +65,7 @@ public class Controller {
 
 		int id = Integer.parseInt(product_id);
 
-		return "{\"product\":" + serviceProduct.getProduct(id) + "}";
+		return "["+serviceProduct.getProduct(id)+"]";
 
 	}
 	 
@@ -74,7 +74,7 @@ public class Controller {
 		if (service.usersWhoRecentlyPurchased(username).isEmpty()) {
 			return "Try with another user, \"" + username + "\" did not buy anything.";
 		}
-		return "{\"recentPurchases\":" + service.usersWhoRecentlyPurchased(username).toString() + "}";
+		return service.usersWhoRecentlyPurchased(username).toString();
 	}
 	 
 //validacija unosa
