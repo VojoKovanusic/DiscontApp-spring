@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PopularPurchaseService {
-  private baseUrl: string = '/api/recent_purchases/';
+  private baseUrl: string = 'http://localhost:8080/api/recent_purchases/';
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.headers });
   constructor(private http: Http) { }

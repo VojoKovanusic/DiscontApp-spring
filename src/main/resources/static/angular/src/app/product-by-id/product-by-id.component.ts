@@ -9,7 +9,6 @@ import { error } from 'selenium-webdriver';
   styleUrls: ['./product-by-id.component.css']
 })
 export class ProductByIdComponent {
-
 @Input("id")id:number;
 private products:Product[]=[];
 constructor(private service: ProductService) { }

@@ -13,6 +13,7 @@ import { PurchaseByUsernameComponent } from './purchase-by-username/purchase-by-
 import { ProductByIdComponent } from './product-by-id/product-by-id.component';
 import { ProductService } from './service/product.service';
 import { PopularPurchaseService } from './service/popular-purchase.service';
+import { PopularPurchaseComponent } from './popular-purchase/popular-purchase.component';
 
 const appRoutes: Routes = [
   { path: '', component: ListPurchasComponent},
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
     AppComponent,
     ListPurchasComponent,
     PurchaseByUsernameComponent,
-    ProductByIdComponent
+    ProductByIdComponent,
+    PopularPurchaseComponent
 
   ],
   imports: [
