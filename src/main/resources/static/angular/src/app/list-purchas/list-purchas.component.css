@@ -1,2 +1,7 @@
-input.ng-pristine.ng-invalid.ng-touched { border: 2px solid red;
+.input.ng-touched.ng-dirty.ng-invalid{
+    border: 2px solid red;
+}
+input.ng-pristine.ng-invalid.ng-touched
+{
+    border: 2px solid red;
 }
