@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PopularPurchases } from '../popular-purchases';
 import { PopularPurchaseService } from '../service/popular-purchase.service';
 import { error } from 'selenium-webdriver';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-popular-purchase',
@@ -9,16 +10,27 @@ import { error } from 'selenium-webdriver';
   styleUrls: ['./popular-purchase.component.css']
 })
 export class PopularPurchaseComponent {
-  private purchase: PopularPurchases;
+  private product: Product;
+  private users: string[];
+  private purchase=new PopularPurchases(this.product, this.users);
+  private list:PopularPurchases;
   @Input("userName") userName: string;
   constructor(private service: PopularPurchaseService) { }
 
   usersWhoRecentlyPurchased() {
     return this.service.usersWhoRecentlyPurchased(this.userName)
-      .subscribe(purchase => { 
-        this.purchase = purchase
-    console.log(this.purchase)
+      .subscribe(list => { 
+        this.list = list
+    console.log(this.list)
   },
   error => console.log(error));
   }
+  isEmptu(){
+    
+    if (this.purchase== null){
+    return true;}
+    else return false;
+
+  }
+  
 }

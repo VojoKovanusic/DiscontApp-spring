@@ -2,13 +2,16 @@
   <table class="table table-striped">
 
     <thead>
+        <th>#</th>
       <th>product Id</th>
       <th>face</th>
       <th>price</th>
       <th>size</th>
     </thead>
     <tbody>
-      <tr *ngFor="let product of allProducts" class="table">
+      <tr class="table" *ngFor="let product of allProducts; let i = index" >
+        
+        <td>{{i + 1}} )</td>
         <td>{{product.id}}</td>
         <td id="face">
           <b>{{product.face}}</b>

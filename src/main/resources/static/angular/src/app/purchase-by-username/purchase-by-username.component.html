@@ -15,13 +15,15 @@
     <div class="table-responsive" *ngIf="!isEmptu()">
       <table class="table table-striped">
         <thead>
+            <th>#</th>
           <th>Id</th>
           <th>Username</th>
           <th>Product Id</th>
           <th>Date</th>
         </thead>
         <tbody>
-          <tr *ngFor="let purchase of purchases">
+          <tr *ngFor="let purchase of purchases ; let i = index">
+              <td>{{i + 1}} )</td>
             <td>{{purchase.id}}</td>
             <td>{{purchase.username}}</td>
             <td>{{purchase.productId}}</td>
