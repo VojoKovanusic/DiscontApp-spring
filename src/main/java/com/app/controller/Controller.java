@@ -65,7 +65,7 @@ public class Controller {
 
 		int id = Integer.parseInt(product_id);
 
-		return "["+serviceProduct.getProduct(id)+"]";
+		return serviceProduct.getProduct(id);
 
 	}
 	 

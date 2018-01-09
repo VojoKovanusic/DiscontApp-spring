@@ -8,7 +8,7 @@ import { ListPurchasComponent } from './list-purchas/list-purchas.component';
 import { Routes, RouterModule } from '@angular/router'
 import { PurchaseService } from './service/purchase.service'
 import { HttpModule } from '@angular/http'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PurchaseByUsernameComponent } from './purchase-by-username/purchase-by-username.component';
 import { ProductByIdComponent } from './product-by-id/product-by-id.component';
 import { ProductService } from './service/product.service';
@@ -33,7 +33,8 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule
   ],
   providers: [PurchaseService,ProductService,PopularPurchaseService],
   bootstrap: [AppComponent]

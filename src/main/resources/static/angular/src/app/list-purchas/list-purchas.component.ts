@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Purchas } from './../purchas';
 import { PurchaseService } from '../service/purchase.service';
 import { error } from 'selenium-webdriver';
+import { FormGroup, FormControl,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-list-purchas',
@@ -9,32 +10,34 @@ import { error } from 'selenium-webdriver';
   styleUrls: ['./list-purchas.component.css']
 })
 export class ListPurchasComponent {
-  private purchases: Purchas[]=[];
-  @Input("userName") userName: string;
-  
+  private purchases: Purchas[] = [];
+  @Input("id") id: number;
+  form = new FormGroup({
+    id: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5)
+    ])
+  });
+
   constructor(private service: PurchaseService) { }
 
   getPurchasesById() {
-    this.purchases= [];
+    this.purchases = [];
     return this.service.peopleWhoPreviouslyPurchasedProduct(this.id)
-    .subscribe(purchases => {
-      this.purchases = purchases
-    },
+      .subscribe(purchases => {
+        this.purchases = purchases
+      },
       error => { console.log(error) });
   }
-  getPurchasesByUserName() {
-    this.purchases= [];
-    return this.service.allPurchasesByUser(this.userName)
-    .subscribe(purchases => {
-      this.purchases = purchases
-    },
-      error => { console.log(error) });
-  }
-  isEmptu(){
-    if (this.purchases.length < 1){
-    return true;}
+
+  isEmptu() {
+    if (this.purchases.length < 1) {
+      return true;
+    }
     else return false;
   }
 
-
+get idF(){
+  return this.form.get('id');
+} 
 }

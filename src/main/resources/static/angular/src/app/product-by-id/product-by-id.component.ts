@@ -10,16 +10,20 @@ import { error } from 'selenium-webdriver';
 })
 export class ProductByIdComponent {
 @Input("id")id:number;
-private products:Product[]=[];
+private product:Product;
 constructor(private service: ProductService) { }
 
   getProductByID(){
-   this.products=[];
+   this.product=new Product();
     return this.service.getProductByID(this.id)
-    .subscribe(products=> {
-      this.products=products;
-      console.log(this.products);
+    .subscribe(product=> {
+      this.product=product;
+      console.log(this.product);
   },
   error => { console.log(error) })
+}
+isNull(){
+  if (this.product.isNull)
+  return true;
 }
 }

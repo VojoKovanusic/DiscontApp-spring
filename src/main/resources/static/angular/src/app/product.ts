@@ -1,4 +1,5 @@
-export class Product {
+export class Product {  isNull: any;
+
   
 	private  id:number;
 	private  face:String;

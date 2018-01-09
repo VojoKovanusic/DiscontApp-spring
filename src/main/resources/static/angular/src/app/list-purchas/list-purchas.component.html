@@ -1,9 +1,24 @@
 <div class="container">
-  <form>
-    <p>Enter product ID:</p>
-    <input type="number" name="id" [(ngModel)]="id">
+  <form [formGroup]="form">
+    <label class="form">Enter id</label>
+    <br>
+    <input 
+    class="input"
+    required
+    type="number" 
+  
+    id="id"
+    [(ngModel)]="id"
+  
+     formControlName="id">
+
+    <div *ngIf="idF.invalid && idF.touched" class="alert alert-danger">
+      <div *ngIf="idF.errors.required"> Id is required</div>
+      <div *ngIf="idF.errors.minlength"> min 3</div>
+      
+    </div>
+
     <button class="Submit" (click)="getPurchasesById()">Search</button>
-    
     <div *ngIf="!isEmptu()">
       <table class="table table-striped">
         <thead>
@@ -24,6 +39,5 @@
 
       </table>
     </div>
-  </form>
+  </form>  
 </div>
-

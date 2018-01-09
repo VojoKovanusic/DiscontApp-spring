@@ -1,28 +1,36 @@
 <div class="container">
-    <form>
-      <p>Enter user name:</p>
-      <input type="text" name="userName" [(ngModel)]="userName">
-      <button  class="btn btn-primary btn-sm" (click)="getPurchasesByUserName()">Search</button>
-      
-      <div class="table-responsive" *ngIf="!isEmptu()">
-        <table class="table table-striped">
-          <thead>
-            <th>Id</th>
-            <th>Username</th>
-            <th>Product Id</th>
-            <th>Date</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let purchase of purchases">
-              <td>{{purchase.id}}</td>
-              <td>{{purchase.username}}</td>
-              <td>{{purchase.productId}}</td>
-              <td>{{purchase.date}}</td>
-            </tr>
-  
-          </tbody>
-  
-        </table>
-      </div>
-    </form>
-  </div>
+  <form [formGroup]="form">
+
+    <label>Enter user name:</label><br>
+
+    <input type="text" name="userName" [(ngModel)]="userName" formControlName="username" class="input">
+
+    <div *ngIf="uname.invalid && uname.touched" class="alert alert-danger">
+      <div *ngIf="uname.errors.required"> Id is required field</div>
+      <div *ngIf="uname.errors.minlength">Username contains min 5 characters</div>
+      <div *ngIf="uname.errors.cannotContainSpace">Username cannot contain white space</div>
+    </div>
+    <button class="btn btn-primary btn-sm" (click)="getPurchasesByUserName()">Search</button>
+
+    <div class="table-responsive" *ngIf="!isEmptu()">
+      <table class="table table-striped">
+        <thead>
+          <th>Id</th>
+          <th>Username</th>
+          <th>Product Id</th>
+          <th>Date</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let purchase of purchases">
+            <td>{{purchase.id}}</td>
+            <td>{{purchase.username}}</td>
+            <td>{{purchase.productId}}</td>
+            <td>{{purchase.date}}</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+  </form>
+</div>
