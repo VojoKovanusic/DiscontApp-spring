@@ -18,6 +18,12 @@ export class ProductService {
     return this.http.get(this.baseUrl+id,this.options).map((response: Response)=>response.json()).
     catch(this.errorHendler);
   }
+
+  getAllProduct(){
+    return this.http.get(this.baseUrl,this.options).map((response: Response)=>response.json()).
+    catch(this.errorHendler);
+  }
+
   errorHendler(error:Response){
     return Observable.throw(error);
   }

@@ -6,9 +6,9 @@
     <input type="text" name="userName" [(ngModel)]="userName" formControlName="username" class="input">
 
     <div *ngIf="uname.invalid && uname.touched" class="alert alert-danger">
-      <div *ngIf="uname.errors.required"> Id is required field</div>
-      <div *ngIf="uname.errors.minlength">Username contains min 5 characters</div>
-      <div *ngIf="uname.errors.cannotContainSpace">Username cannot contain white space</div>
+      <div *ngIf="uname.errors.required">- Id is required field</div>
+      <div *ngIf="uname.errors.minlength">- Username contains min 5 characters</div>
+      <div *ngIf="uname.errors.cannotContainSpace">- Username cannot contain white space</div>
     </div>
     <button class="btn btn-primary btn-sm" (click)="getPurchasesByUserName()">Search</button>
 

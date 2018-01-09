@@ -15,7 +15,6 @@ export class ListPurchasComponent {
   form = new FormGroup({
     id: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
     ])
   });
 

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.app.entity.Product;
 import com.app.service.ServiceOtherUsersWhoRecentlyPurchased;
 import com.app.service.ServiceProducts;
 import com.app.service.ServicePurchaBbyProduct;
@@ -34,7 +36,7 @@ public class Controller {
 		ArrayList<String> listpurchase = servicePurchasesByUser.getPurchasesByUsername(username);
 		
 		if (listpurchase.isEmpty())
-			return "User with username of '{{" + username + "}}' was not found";
+			return  null;
 		return listpurchase.toString();
 
 	}
@@ -50,7 +52,7 @@ public class Controller {
 
 		List<String> listpurchase = purchasesByProduct.peopleWhoPreviouslyPurchasedProduct(id);
 		if (listpurchase.isEmpty())
-			return "Purchase with  product id'{{" + id + "}}' was not found";
+			return  null;
 		return listpurchase.toString();
 
 	}
@@ -77,6 +79,13 @@ public class Controller {
 		return service.usersWhoRecentlyPurchased(username).toString();
 	}
 	 
+	// info about the products
+		@RequestMapping(path = "api/products/", method = RequestMethod.GET)
+		public List<Product> getAllProducts() {
+
+			return serviceProduct.getAllProducts();
+
+		}
 //validacija unosa
 	private boolean isNumber(String id) {
 		char ch[] = id.toCharArray();

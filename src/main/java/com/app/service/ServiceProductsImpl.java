@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -29,10 +31,16 @@ public class ServiceProductsImpl implements ServiceProducts {
 				
 				return JavaToJson.convertJavaToJSON(product);
 		}
-		return "Product with id'{{" + id + "}}' was not found";
+		return  null;
 	}
 
 	@CacheEvict(value = "product", key = "#id")
 	public void cacheProductEvict(int id) {
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		// TODO Auto-generated method stub
+		return scraping.getAllProducts();
 	}
 }

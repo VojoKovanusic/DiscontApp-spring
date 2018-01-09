@@ -1,0 +1,23 @@
+<div class class="container">
+  <table class="table table-striped">
+
+    <thead>
+      <th>productId</th>
+      <th>face</th>
+      <th>price</th>
+      <th>size</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of allProducts" class="table">
+        <td>{{product.id}}</td>
+        <td id="face">
+          <b>{{product.face}}</b>
+        </td>
+        <td>{{product.price}}</td>
+        <td>{{product.size}}</td>
+      </tr>
+    </tbody>
+
+
+  </table>
+</div>

@@ -1,0 +1,12 @@
+ 
+input.ng-pristine.ng-invalid.ng-touched
+{
+    border: 2px solid rgb(255, 0, 0);
+}
+input.ng-touched.ng-dirty.ng-invalid{
+    border: 2px solid rgb(255, 0, 0);
+     max-width:  4cm; 
+}
+.alert.alert-danger{
+    max-width:  8cm; 
+}

@@ -5,3 +5,6 @@ input.ng-pristine.ng-invalid.ng-touched
 input.ng-invalid.ng-dirty.ng-touched{
     border: 2px solid red;
 }
+.alert.alert-danger{
+    max-width:  8cm; 
+}
