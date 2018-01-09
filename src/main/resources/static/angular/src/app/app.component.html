@@ -1,20 +1,25 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to Purchase app
-  </h1>
-</div>
 
 
-<app-list-purchas [id]="id"></app-list-purchas>
-<br>
 
-<app-purchase-by-username [userName]="userName"></app-purchase-by-username>
-<br>
+<body class="popular-purchase">
+  <div style="text-align:center">
+    <h1>
+     <strong>Welcome to Purchase app</strong> 
+    </h1>
+  </div>
 
-<app-product-by-id [id]="id"></app-product-by-id>
 
-<br>
-<app-popular-purchase [userName]="userName"></app-popular-purchase>
-<br>
+  <app-list-purchas [id]="id"></app-list-purchas>
+  <br>
 
-<app-all-products></app-all-products>
+  <app-purchase-by-username [userName]="userName"></app-purchase-by-username>
+  <br>
+
+  <app-product-by-id [id]="id"></app-product-by-id>
+
+  <br>
+  <app-popular-purchase [userName]="userName"></app-popular-purchase>
+  <br>
+
+  <app-all-products></app-all-products>
+</body>
