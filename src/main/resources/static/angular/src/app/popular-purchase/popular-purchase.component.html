@@ -15,13 +15,13 @@
               <th>Users</th>
             </thead>
             <tbody>
-              <tr *ngFor="let purchase of list; let product of products; let user of recentUserNames" >
+              <tr *ngFor="let purchase of list; let product of products;" >
                 
                 <td>{{purchase.product.id}}</td>
                 <td>{{purchase.product.face}}</td>
                 <td>{{purchase.product.price}}</td>
                 <td>{{purchase.product.size}}</td>
-                <td>{{purchase.user}}</td>
+                <td>{{purchase.recentUserNames}}</td>
              
               </tr>
     
