@@ -40,7 +40,7 @@ public class ServiceProductsImpl implements ServiceProducts {
 
 	@Override
 	public List<Product> getAllProducts() {
-		// TODO Auto-generated method stub
+		 
 		return scraping.getAllProducts();
 	}
 }
