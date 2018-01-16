@@ -1,4 +1,6 @@
 
+
+
 export class Purchas {
 
     private id: number;

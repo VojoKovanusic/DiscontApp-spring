@@ -10,8 +10,8 @@ import { Product } from '../product';
   styleUrls: ['./popular-purchase.component.css']
 })
 export class PopularPurchaseComponent {
-  private product: Product;
-  private recentUserNames: string[];
+  private product: Product=new Product();
+  private recentUserNames: string[]=[];
   private purchase=new PopularPurchases(this.product, this.recentUserNames);
   private list:PopularPurchases;
   @Input("userName") userName: string;
