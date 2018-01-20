@@ -1,0 +1,45 @@
+<h2>Purchases API</h2>
+A sample API for Discount Ascii Warehouse
+ <br>
+<a href="https://github.com/x-team/daw-purchases/archive/master.zip" target="_blank"><strong>Download project</strong></a> on your machine!<br>
+<h4> Install and start the server</h4>
+<ul>
+  <li>install</li>
+  <li>npm start</li>
+</ul>
+<br> You can also specify the port to listen on (default is 8000): PORT=3456 npm start
+<br> Now you can make API requests, eg: curl -i localhost:8000/api/users/
+<br>
+<h4>Generating data</h4>
+<ul>
+  <li>to use the same set of hardcoded data every time, put some files in .data/</li>
+  <li>if the files aren't found there (or invalid) src/setup-store.js will generate random data with faker</li>
+  <li>you can also run ./bin/generate-data.js to see an example of random data </li>
+</ul>
+<h4>API Reference</h4>
+GET purchases/by_user/:username
+<ul>
+  <li>
+    params: {{ '{' }} System {{'}'}}
+
+
+    <ul>
+      <li>username (string)</li>
+      <li>?limit (int)</li>
+    </ul>
+  </li>
+  <li>response (json):</li>
+</ul>
+<span>
+  {{ '{' }}
+  <br> "purchases": [
+  <br> {{ '{' }}
+  <br> "id": (int),
+  <br> "productId": (int),
+  <br> "username": (string),
+  <br> "date": (iso8601 string)
+  <br> {{'}'}},
+  <br> ...
+  <br> ]
+  <br> {{'}'}}
+</span>

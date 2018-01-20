@@ -18,16 +18,19 @@ import { AllProductsComponent } from './all-products/all-products.component';
 import { LikeComponent } from './like/like.component';
 import { MyNavbarComponent } from './my-navbar/my-navbar.component';
 import { NotfoundComponentComponent } from './notfound-component/notfound-component.component';
-import { getHashes, DEFAULT_ENCODING } from 'crypto';
-import { SSL_OP_MICROSOFT_BIG_SSLV3_BUFFER } from 'constants';
+
 import { hasLifecycleHook } from '@angular/compiler/src/lifecycle_reflector';
 import { getDebugNode } from '@angular/core/src/debug/debug_node';
 import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { HomeComponent } from './home/home.component';
+import { TaskComponent } from './task/task.component';
+import { HowRunComponent } from './how-run/how-run.component';
+import { MySolutionComponent } from './my-solution/my-solution.component';
+
 
 const appRoutes: Routes = [
-  { path: '', component: ListPurchasComponent},
-  { path: '', component: ProductByIdComponent}
+/* { path: '', component: ListPurchasComponent},
+  { path: '', component: ProductByIdComponent}  */
 
 ]
 @NgModule({
@@ -41,32 +44,34 @@ const appRoutes: Routes = [
     LikeComponent,
     MyNavbarComponent,
     NotfoundComponentComponent,
-    HomeComponent
+    HomeComponent,
+    TaskComponent,
+    HowRunComponent,
+    MySolutionComponent
 
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    /* RouterModule.forRoot(appRoutes), */
+    RouterModule.forRoot(appRoutes),
     RouterModule.forRoot([ 
       {
         path:'', 
         component: HomeComponent
       },
-    {
-      path:'products', 
-      component: AllProductsComponent
-    },
-    {
-      path:'list/purchas', 
-      component: ListPurchasComponent
-    },
-    {
-      path:'purchasebyusername/:username',
-      component: PurchaseByUsernameComponent
-    }
-    ,
+      {
+        path:'task', 
+        component: TaskComponent
+      },
+      {
+        path:'howToRun', 
+        component: HowRunComponent
+      },
+      {
+        path:'mySolution', 
+        component: MySolutionComponent
+      },
     {
       path:'**',
       component: NotfoundComponentComponent 

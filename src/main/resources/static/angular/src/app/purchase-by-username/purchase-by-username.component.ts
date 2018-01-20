@@ -4,7 +4,7 @@ import { PurchaseService } from '../service/purchase.service';
 import { error } from 'selenium-webdriver';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
 import { UserNameValidators } from './username.validation';
-
+ 
 @Component({
   selector: 'app-purchase-by-username',
   templateUrl: './purchase-by-username.component.html',

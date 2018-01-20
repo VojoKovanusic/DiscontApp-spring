@@ -1,34 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-<body>
 <app-my-navbar></app-my-navbar>
-  <router-outlet></router-outlet>
- 
-  <div style="text-align:center">
-    <h1>
-      <strong>Welcome to Purchase app</strong>
-    </h1>
-  </div>
-  <div class="container">
-    <div class="col-md-12">
-      <app-list-purchas [id]="id"></app-list-purchas>
-    </div>
-    <div class="col-md-12">
-      <app-purchase-by-username [userName]="userName"></app-purchase-by-username>
-    </div>
-    <div class="col-md-12">
-      <app-product-by-id [id]="id"></app-product-by-id>
-    </div>
-    <div class="col-md-12">
-      <app-popular-purchase [userName]="userName"></app-popular-purchase>
-    </div>
-  </div>
-  <div class="col-md-12">
-    <br>
-    <app-all-products></app-all-products>
-  </div>
+<router-outlet></router-outlet>
 
-</body>
-
-</html>
