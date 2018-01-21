@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MyNavbarComponent implements OnInit {
   img: string;
   constructor() {
-    this.img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThctW_aDu1WU6igXgbJ2qBOkyac4aj5fEIxFEIZzm1KN5eh9SyzQ"
+    this.img="https://image.freepik.com/vector-gratis/fachada-de-tienda-plana-con-toldo_23-2147542588.jpg"
   }
   ngOnInit() {
     

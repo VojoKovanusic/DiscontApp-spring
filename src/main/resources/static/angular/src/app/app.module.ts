@@ -26,6 +26,7 @@ import { HomeComponent } from './home/home.component';
 import { TaskComponent } from './task/task.component';
 import { HowRunComponent } from './how-run/how-run.component';
 import { MySolutionComponent } from './my-solution/my-solution.component';
+import { AboutAutorComponent } from './about-autor/about-autor.component';
 
 
 const appRoutes: Routes = [
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     HomeComponent,
     TaskComponent,
     HowRunComponent,
-    MySolutionComponent
+    MySolutionComponent,
+    AboutAutorComponent
 
   ],
   imports: [
@@ -71,6 +73,10 @@ const appRoutes: Routes = [
       {
         path:'mySolution', 
         component: MySolutionComponent
+      },
+      {
+        path:'autor', 
+        component: AboutAutorComponent
       },
     {
       path:'**',

@@ -1,0 +1,11 @@
+.bg-img
+{
+    width: 115%;
+    margin: 7px auto;
+    padding: 7px;
+    border-radius:7px;
+    box-sizing: border-box;
+    background-color: rgb(217, 217, 231);
+width:  380px;
+ 
+}
