@@ -8,4 +8,6 @@ public interface ServiceProducts {
 	 
 	String getProduct(int id) ;
 	List<Product> getAllProducts();
+	void addProduct(Product product);
+	void remove(Product product);
 }

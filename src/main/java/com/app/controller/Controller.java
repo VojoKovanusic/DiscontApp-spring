@@ -35,47 +35,32 @@ public class Controller {
 
 		ArrayList<String> listpurchase = servicePurchasesByUser.getPurchasesByUsername(username);
 		
-		if (listpurchase.isEmpty())
-			return  null;
 		return listpurchase.toString();
 
 	}
 
 	// list of all people who previously purchased that product
 	@RequestMapping(path = "api/purchases/by_product/{product_id}", method = RequestMethod.GET)
-	public String peopleWhoPreviouslyPurchasedProduct(@PathVariable String product_id) {
-		// nisam uspio sa Exceptionima uhvatiti ilegalan unos...pa sam pjeske
-		if (isNumber(product_id))
-			return "Entered  id'{{" + product_id + "}}' was not found, because is not in number format";
-
-		int id = Integer.parseInt(product_id);
-
-		List<String> listpurchase = purchasesByProduct.peopleWhoPreviouslyPurchasedProduct(id);
-		if (listpurchase.isEmpty())
-			return  null;
+	public String peopleWhoPreviouslyPurchasedProduct(@PathVariable int product_id) {
+		
+		List<String> listpurchase = purchasesByProduct.peopleWhoPreviouslyPurchasedProduct(product_id);
+		 
 		return listpurchase.toString();
 
 	}
 
 	// info about the products
 	@RequestMapping(path = "api/products/{product_id}", method = RequestMethod.GET)
-	public String getProductByID(@PathVariable String product_id) {
+	public String getProductByID(@PathVariable int product_id) {
 
-		// nisam uspio sa Exceptionima uhvatiti ilegalan unos...pa sam pjeske
-		if (isNumber(product_id))
-			return "Entered  id'{{" + product_id + "}}' was not found, because is not in number format ";
-
-		int id = Integer.parseInt(product_id);
-
-		return serviceProduct.getProduct(id);
+		 
+		return serviceProduct.getProduct(product_id);
 
 	}
 	 
 	@RequestMapping(path = "/api/recent_purchases/{username:.+}", method = RequestMethod.GET)
 	public String recentPurchasesByUsername(@PathVariable String username) {
-		if (service.usersWhoRecentlyPurchased(username).isEmpty()) {
-			return "Try with another user, \"" + username + "\" did not buy anything.";
-		}
+		
 		return service.usersWhoRecentlyPurchased(username).toString();
 	}
 	 
@@ -86,13 +71,7 @@ public class Controller {
 			return serviceProduct.getAllProducts();
 
 		}
-//validacija unosa
-	private boolean isNumber(String id) {
-		char ch[] = id.toCharArray();
-		for (char c : ch) {
-			if (!Character.isDigit(c))
-				return true;
-		}
-		return false;
-	}
+
+	
+	
 }

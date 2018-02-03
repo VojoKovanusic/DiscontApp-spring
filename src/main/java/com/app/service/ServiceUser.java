@@ -9,5 +9,6 @@ public interface ServiceUser {
 
 	public List<User>  getUsers();
 	public List<String>  getUserName();
+	public void addUser(User user);
  
 }

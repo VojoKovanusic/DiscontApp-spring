@@ -43,4 +43,18 @@ public class ServiceProductsImpl implements ServiceProducts {
 		 
 		return scraping.getAllProducts();
 	}
+
+	@Override
+	public void addProduct(Product product) {
+		long id=scraping.getAllProducts().size()+1;
+		product.setId(id);
+		getAllProducts().add(product);
+		
+	}
+
+	@Override
+	public void remove(Product product) {
+		getAllProducts().remove(product);
+		
+	}
 }

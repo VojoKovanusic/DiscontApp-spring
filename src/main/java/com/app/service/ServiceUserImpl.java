@@ -13,11 +13,13 @@ public class ServiceUserImpl implements ServiceUser {
 
 	@Autowired
 	private ScrapingImpl scraping;
-
+	private ArrayList<User> usersList = new ArrayList<>();
+	
 	@Override
 	public ArrayList<User> getUsers() {
-
-		ArrayList<User> usersList =  getFromJsonUsers();
+		if(usersList.size()==0)
+	usersList.addAll(getFromJsonUsers());
+		
 		return usersList;
 	}
 
@@ -53,5 +55,12 @@ public class ServiceUserImpl implements ServiceUser {
 			names.add(user.getUsername());
 		}
 		return names;
+	}
+
+	@Override
+	public void addUser(User user) {
+		
+		getUsers().add(user); 
+		
 	}
 }

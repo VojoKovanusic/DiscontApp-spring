@@ -14,11 +14,12 @@ import com.app.service.ServiceUser;
 public class ScrapingImpl implements ScrapingInterface {
 	@Autowired
 	private ServiceUser serviceUser;
+	private List<Product> listOfProducts = new ArrayList<>();
 
 	@Override
 	public List<Product> getAllProducts() {
-		List<Product> listOfProducts = new ArrayList<>();
 
+		if(this.listOfProducts.size()==0) {
 		String textObj = getTextProducts();
 		JSONObject obj;
 		try {
@@ -38,7 +39,7 @@ public class ScrapingImpl implements ScrapingInterface {
 		} catch (Exception e) {
 			e.getMessage();
 		}
-
+		}
 		return listOfProducts;
 	}
 

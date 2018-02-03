@@ -1,7 +1,7 @@
 package com.app.entity;
 
 public class User{
-
+	 
 	private String username;
 	private String email;
 
@@ -11,11 +11,6 @@ public class User{
 		this.email = email;
 	}
 
-	public User(long index, String string, String string2) {
-
-		this.username = string;
-		this.email = string2;
-	}
 
 	public User() {
 		 
