@@ -52,7 +52,6 @@ public class Controller {
 	// info about the products
 	@RequestMapping(path = "api/products/{product_id}", method = RequestMethod.GET)
 	public String getProductByID(@PathVariable int product_id) {
-
 		 
 		return serviceProduct.getProduct(product_id);
 

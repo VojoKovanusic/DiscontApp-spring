@@ -10,7 +10,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProductService {
 
   private baseUrl:string='http://localhost:8080/api/products/';
-  private deleteUrl:string='http://localhost:8080/delete/product/';
+  private deleteUrl:string='http://localhost:8080/product/';
   private headers= new Headers({'Content-Type':'application/json'});
   private options= new RequestOptions({headers: this.headers});
   constructor(private http:Http) { }
@@ -33,5 +33,9 @@ export class ProductService {
     return this.http.delete(this.deleteUrl+id,this.options).map((response: Response)=>response.json()).
     catch(this.errorHendler);
   }
-
+  
+  updateProduct(id:number){
+    return this.http.put(this.deleteUrl+id,this.options).map((response: Response)=>response.json()).
+    catch(this.errorHendler);
+  }
 }
