@@ -26,9 +26,6 @@
 
 
 	<dependencies>
-	 
-
-
 		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>

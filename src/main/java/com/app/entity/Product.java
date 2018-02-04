@@ -6,17 +6,17 @@ public class Product implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	private Long productId;
+	private Long id;
 	private String face;
 	private double price;
 	private int size;
 
 	public long getId() {
-		return productId;
+		return id;
 	}
 
 	public void setId(long id) {
-		this.productId = id;
+		this.id = id;
 	}
 
 	public String getFace() {
@@ -45,7 +45,7 @@ public class Product implements Serializable {
 
 	public Product(long id, String face, double price, int size) {
 		super();
-		this.productId = id;
+		this.id = id;
 		this.face = face;
 		this.price = price;
 		this.size = size;
@@ -57,7 +57,7 @@ public class Product implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + productId + ", face=" + face + ", price=" + price + ", size=" + size + "]";
+		return "Product [id=" + id + ", face=" + face + ", price=" + price + ", size=" + size + "]";
 	}
 
 }

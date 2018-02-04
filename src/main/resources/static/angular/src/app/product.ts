@@ -1,8 +1,11 @@
-export class Product {  isNull: any;
+export class Product {  
+	 
+	  isNull: any;
 	  id:number;
-	private  face:String;
-	private  price:number;
-	private  size:number;
+	  face:String;
+	  price:number;
+		size:number;
+		
 	constructor() { }
  
 }

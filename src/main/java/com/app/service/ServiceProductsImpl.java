@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +58,16 @@ public class ServiceProductsImpl implements ServiceProducts {
 		getAllProducts().remove(product);
 		
 	}
+
+	@Override
+	public void updateProduct(Product product) {
+		
+			Product modifiedProduct = getAllProducts().stream().filter(p -> p.getId() == product.getId()).findFirst().orElse(null);
+			modifiedProduct.setFace(product.getFace()); 
+			modifiedProduct.setPrice(product.getPrice()); 
+			modifiedProduct.setSize(product.getSize());
+			
+				
+			}
+	
 }

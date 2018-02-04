@@ -65,8 +65,16 @@ const appRoutes: Routes = [
         component: HomeComponent
       },
       {
+        path:'add-update', 
+        component: AddProductComponent
+      },
+      {
         path:'task', 
         component: TaskComponent
+      },
+      {
+        path:'all/product', 
+        component: MySolutionComponent
       },
       {
         path:'howToRun', 

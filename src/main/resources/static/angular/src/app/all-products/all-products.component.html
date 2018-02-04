@@ -19,7 +19,7 @@
 
             <td>{{i + 1}} )</td>
             <td>{{product.id}}</td>
-            <td id="face">
+            <td >
               <b>{{product.face}}</b>
             </td>
             <td>{{product.price}}</td>
@@ -27,14 +27,14 @@
             <td>
               <app-like></app-like>
             </td>
-            <td><button type="button" class="btn btn-primary" >Edit</button> 
+            <td><button type="button" class="btn btn-primary"(click)="updateProduct(product)" >Edit</button> 
              <button type="button" class="btn btn-danger" (click)="deleteProduct(product)">Delete</button></td>
           </tr>
         </tbody>
 
 
       </table>
-     
+     <button type="button" class="btn btn-primary" (click)="addProduct()">Add product</button> 
     </div>
   </div>
-</div> <td><button type="button" class="btn btn-primary">Add product</button> 
+</div> <td>

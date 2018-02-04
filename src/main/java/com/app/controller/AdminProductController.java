@@ -23,18 +23,20 @@ public class AdminProductController {
 
 	@PostMapping(path = "/product")
 	public Product addProduct(@RequestBody Product product) {
+		System.out.println("product add "+product.toString());
 		serviceproduct.addProduct(product);
 		return product;
 	}
 
 	@PutMapping(path = "/product")
 	public Product updateProduct(@RequestBody Product product) {
-		serviceproduct.addProduct(product);
+		System.out.println("product update "+product.toString());
+		serviceproduct.updateProduct(product);
 		return product;
 	}
 	
 	@DeleteMapping(value = "/product/{id}")
-	public boolean deleteUser(@PathVariable Long id) {
+	public boolean deleteProduct(@PathVariable Long id) {
 		Product product = this.serviceproduct.getAllProducts().stream().filter(user -> user.getId() == id).findFirst().orElse(null);
 		if (product != null) {
 			serviceproduct.remove(product);
