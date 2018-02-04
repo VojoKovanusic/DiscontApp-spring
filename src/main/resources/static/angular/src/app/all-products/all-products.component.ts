@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../service/product.service';
+import { error } from 'selenium-webdriver';
 
 @Component({
   selector: 'app-all-products',
@@ -13,7 +14,6 @@ export class AllProductsComponent implements OnInit {
   constructor(private service:ProductService) { }
 
   ngOnInit() {
-   
      return this.service.getAllProduct()
      .subscribe(allProducts=> {
        this.allProducts=allProducts;
@@ -21,5 +21,10 @@ export class AllProductsComponent implements OnInit {
    },
    error => { console.log(error) })
  }
-
+  deleteProduct(product){ 
+    this.service.deleteProduct(product.id).subscribe(data=>{
+      this.allProducts.splice(this.allProducts.indexOf(product),1);
+    }, (error)=>console.log(error));
+   this.ngOnInit();
+  }
 }

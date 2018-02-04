@@ -14,6 +14,7 @@ export class PopularPurchaseComponent {
   private recentUserNames: string[]=[];
   private purchase=new PopularPurchases(this.product, this.recentUserNames);
   private list:PopularPurchases;
+  
   @Input("userName") userName: string;
   constructor(private service: PopularPurchaseService) { }
 

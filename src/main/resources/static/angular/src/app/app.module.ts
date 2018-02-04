@@ -27,6 +27,7 @@ import { TaskComponent } from './task/task.component';
 import { HowRunComponent } from './how-run/how-run.component';
 import { MySolutionComponent } from './my-solution/my-solution.component';
 import { AboutAutorComponent } from './about-autor/about-autor.component';
+import { AddProductComponent } from './add-product/add-product.component';
 
 
 const appRoutes: Routes = [
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     TaskComponent,
     HowRunComponent,
     MySolutionComponent,
-    AboutAutorComponent
+    AboutAutorComponent,
+    AddProductComponent
 
   ],
   imports: [
