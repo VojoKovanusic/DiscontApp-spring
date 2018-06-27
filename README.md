@@ -1,8 +1,45 @@
-Povezivanje Rest Spring boot app sa angularom, preko zadatka koji je glasio: 
+
+
+<!DOCTYPE html>
+<html>
+<body>
+  
+ <h2>
+Korištene Tehnologije
+ </h2>
+ 
+ Kao temelj projekta poslužio je <b>Spring RESTful</b> sa svojim pratećim servisima, kontrolerima.... Konfiguraciju Springa sam izvršaio pomoć <strong>Spring boot-a</strong>. Za frontend tehnologiju poslužio mi je Angular, ove novije verzije, ne JS.
+ 
+Ovo je moj prvi dodir sa front tehnologijama, koji sam iskoristio da pokušam nadograditi ovaj
+      projekat.
+
+  <h2>Funkcionalnosti sajta</h2>
+  Ovdje se radi o jednom klasičnom web projektu, sa odredjenom interakcijom korisnika i web sajta.
+    <p>
+              Ova WEB prezentacija ima za cilj da poveže zaljubljenike u prirodu, a ujedno da predstavlja i nekakav vid registra zanimljivih
+              lokacija na kojima su pronadjene, uočene i uslikane određene biljne i životinjske vrste. Za sada na sajtu postoji
+              samo dio koji je vezan za Leptire, gdje svi posjetioci mogu da vide listu lokacija i izvrse pretragu unjetih vrsta
+              po rodu i vrsti. U detaljima lokacije se nalaze: rod i vrsta, slika, gps lokacija sa mapom i oznakom na njoj gdje je pronadjena
+              vrsta i opis same lokacije. Nadam se u budućnosti povećanju funkcionalnosti sajta i uvodjenje novog topika za neke druge životinjske, ali i biljne vrste...zavisno od potreba
+              i vremena.
+           
+  
+Postoje dvije vrste korisnika na sajtu:
+<strong> Posjetioci</strong> - mogu samo da vrše pregled sadržaja
+<strong> Registrovani korisnici</strong>- aktivno učestvuju u radu sajta dodavanjem lokacija
+       
+         
+
+                
+           
+
+
+     
+           
+     
 
  	                                         
-                                           
-                                           Java exam
+  <h2>  Java exam</h2>
                                            
                                            
 
@@ -59,3 +96,7 @@ Your solution should be a zipped (or gzipped) archive including:
 -	all source code required to run the application
 -	step-by-step instructions for the reviewer to follow so that they can run your application.
 -	any other notes or rationale you think is helpful for the reviewer to consider when grading your solution.
+
+ 
+</body>
+</html>
