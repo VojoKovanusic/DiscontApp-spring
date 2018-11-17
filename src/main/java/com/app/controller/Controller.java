@@ -49,7 +49,7 @@ public class Controller {
 
 	}
 
-	// info about the products
+ 
 	@RequestMapping(path = "api/products/{product_id}", method = RequestMethod.GET)
 	public String getProductByID(@PathVariable int product_id) {
 		 
@@ -63,7 +63,7 @@ public class Controller {
 		return service.usersWhoRecentlyPurchased(username).toString();
 	}
 	 
-	// info about the products
+	 
 		@RequestMapping(path = "api/products/", method = RequestMethod.GET)
 		public List<Product> getAllProducts() {
 
