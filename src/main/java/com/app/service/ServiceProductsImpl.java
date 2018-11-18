@@ -1,36 +1,48 @@
 package com.app.service;
 
-import java.util.Collection;
+
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import com.app.entity.Product;
-import com.app.json.JavaToJson;
-import com.app.scraping.ScrapingImpl;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
 public class ServiceProductsImpl implements ServiceProducts {
 
-	@Autowired
-	private ScrapingImpl scraping;
 
+	
+	
+	@Override
+	public List<Product> getAllProducts() {
+		 
+		 final String uri = "http://localhost:8000/api/products";
+	     
+		    RestTemplate restTemplate = new RestTemplate();
+	 
+			List<Product> products =
+					restTemplate.getForObject(uri,HelperProductsClass.class)
+					.getProducts();
+		     
+		     return products ;
+		}
+	
+	
 	@Override
 	@Cacheable(value = "product", key = "#id")
-	public String getProduct(int id) {
+	public String getProductById(int id) {
 
-		System.out.println("*************Test cache*******getProduct(int id)");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-		}
-
-		for (Product product : scraping.getAllProducts()) {
+		for (Product product : getAllProducts()) {
+			System.out.println("id: "+id);
+			System.out.println("product.getId(): "+product.getId());
 			if (product.getId() == id)
-				
-				return JavaToJson.convertJavaToJSON(product);
+			
+				return  product.toString() ;
 		}
 		return  null;
 	}
@@ -39,15 +51,12 @@ public class ServiceProductsImpl implements ServiceProducts {
 	public void cacheProductEvict(int id) {
 	}
 
-	@Override
-	public List<Product> getAllProducts() {
-		 
-		return scraping.getAllProducts();
-	}
+
+	 
 
 	@Override
 	public void addProduct(Product product) {
-		long id=scraping.getAllProducts().size()+1;
+		long id= getAllProducts().size()+1;
 		product.setId(id);
 		getAllProducts().add(product);
 		
@@ -70,4 +79,15 @@ public class ServiceProductsImpl implements ServiceProducts {
 				
 			}
 	
+}
+
+class HelperProductsClass {
+
+	   @JsonProperty("products")
+	   private List<Product> products; 
+	   
+	List<Product> getProducts() {
+		return products;
+	}
+
 }

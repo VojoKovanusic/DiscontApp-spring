@@ -11,7 +11,7 @@ import com.app.entity.PopularPurchases;
 import com.app.entity.Product;
 import com.app.entity.Purchas;
 import com.app.json.JavaToJson;
-import com.app.scraping.ScrapingInterface;
+
 
 @Component
 public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
@@ -19,7 +19,7 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 	@Autowired
 	private ServicePurchasesByUser userService;
 	@Autowired
-	private ScrapingInterface scraping;
+	private ServiceProducts serviceProducts;
 
 	@Override
 	// @Cacheable("popular")
@@ -27,7 +27,7 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 
 		ArrayList<PopularPurchases> popularList = new ArrayList<>();
 
-		for (Product product : scraping.getAllProducts()) {
+		for (Product product : serviceProducts.getAllProducts()) {
 			popularList.add(new PopularPurchases(product));
 		}
 

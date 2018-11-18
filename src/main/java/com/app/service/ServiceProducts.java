@@ -6,7 +6,7 @@ import com.app.entity.Product;
 
 public interface ServiceProducts {
 	 
-	String getProduct(int id) ;
+	String getProductById(int id) ;
 	List<Product> getAllProducts();
 	void addProduct(Product product);
 	void updateProduct(Product product);

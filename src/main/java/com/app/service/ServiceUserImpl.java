@@ -2,55 +2,37 @@ package com.app.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import com.app.entity.User;
-import com.app.scraping.ScrapingImpl;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Service
 public class ServiceUserImpl implements ServiceUser {
 
-	@Autowired
-	private ScrapingImpl scraping;
-	private ArrayList<User> usersList = new ArrayList<>();
-	
 	@Override
 	public ArrayList<User> getUsers() {
-		if(usersList.size()==0)
-	usersList.addAll(getFromJsonUsers());
+
+		final String uri = "http://localhost:8000/api/users";
+	     
+		    RestTemplate restTemplate = new RestTemplate();
+	 
+		    List<User> usersList =
+					restTemplate.getForObject(uri,HelperUserClass.class)
+					.getUsers();
+		     
+		     return (ArrayList<User>) usersList ;
 		
-		return usersList;
 	}
 
-	private ArrayList<User> getFromJsonUsers() {
-
-		ArrayList<User> usersList = new ArrayList<>();
-		String textObj = scraping.getTextUsers();
-		JSONObject obj;
-
-		try {
-			obj = new JSONObject(textObj);
-			org.json.JSONArray users = obj.getJSONArray("users");
-
-			for (int i = 0; i < users.length(); ++i) {
-				JSONObject jsonObj = users.getJSONObject(i);
-
-				String username = jsonObj.getString("username");
-				String email = jsonObj.getString("email");
-				usersList.add(new User(username, email));
-			}
-
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		return usersList;
-	}
 
 	@Override
 	public List<String> getUserName() {
+		
 		List<String> names = new ArrayList<>();
-
 		for (User user : getUsers()) {
 			names.add(user.getUsername());
 		}
@@ -59,8 +41,18 @@ public class ServiceUserImpl implements ServiceUser {
 
 	@Override
 	public void addUser(User user) {
-		
 		getUsers().add(user); 
 		
 	}
+	
+}
+class HelperUserClass {
+	
+	@JsonProperty("users")
+	private List<User> users; 
+	
+	List<User> getUsers() {
+		return users;
+	}
+	
 }

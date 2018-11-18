@@ -24,7 +24,9 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 
 	@Override
 	public List<Purchas> getAllPurchases() throws IOException {
+		
 		ArrayList<Purchas> allPurchases = new ArrayList<>();
+		
 		for (User user : serviceUser.getUsers()) {
 			ArrayList<Purchas> list = jsonToJavaObj.getPurchasesByName(user.getUsername());
 			{
@@ -36,25 +38,7 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 		}
 		return allPurchases;
 	}
-	/*
-	 * @Override public List<Purchas> getAllPurchases() {
-	 * 
-	 * List<Purchas> listOfPurchases = new ArrayList<>(); String text =
-	 * scraping.getTextPurchasesByUser().replace("]}{\"purchases\":[", ",");
-	 * 
-	 * try { JSONObject jsonObject = new JSONObject(text); JSONArray purchases =
-	 * (JSONArray) jsonObject.get("purchases"); int i = 0; while (true) {
-	 * 
-	 * ++i; JSONObject jsonObj = purchases.getJSONObject(i); int id =
-	 * jsonObj.getInt("id"); String username = jsonObj.getString("username"); Long
-	 * productId = jsonObj.getLong("productId"); String date =
-	 * jsonObj.getString("date"); if (date == null) break; listOfPurchases.add(new
-	 * Purchas(id, username, productId, date));
-	 * 
-	 * } } catch (Exception e) { e.getMessage(); }
-	 * 
-	 * return listOfPurchases; }
-	 */
+
 
 	@Override
 	@Cacheable(value = "purchasesByUsername", key = "#username")
@@ -93,6 +77,7 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 
 	private ArrayList<String> convertJavaObjectToJson(ArrayList<Purchas> listpurchase) {
 		ArrayList<String> jsonList = new ArrayList<>();
+		
 		for (Purchas purchas : getFiveRecentPurchases(listpurchase)) {
 			String jsonFormat = JavaToJson.convertJavaToJSON(purchas);
 			jsonList.add(jsonFormat);
