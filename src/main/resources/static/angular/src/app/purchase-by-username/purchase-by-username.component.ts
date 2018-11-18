@@ -27,7 +27,7 @@ export class PurchaseByUsernameComponent  {
     this.purchases= [];
     return this.service.allPurchasesByUser(this.userName)
     .subscribe(purchases => {
-      this.purchases = purchases
+      this.purchases = purchases 
     }
     ,
       error => { console.log(error) });
