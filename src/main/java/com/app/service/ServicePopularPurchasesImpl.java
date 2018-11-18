@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import com.app.entity.PopularPurchases;
 import com.app.entity.Product;
 import com.app.entity.Purchas;
-import com.app.json.JavaToJson;
 
 
 @Component

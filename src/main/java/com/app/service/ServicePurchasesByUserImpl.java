@@ -1,7 +1,6 @@
 package com.app.service;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,45 +9,49 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.app.entity.Purchas;
-import com.app.entity.User;
-import com.app.json.JavaToJson;
-import com.app.json.JsonToJava;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 @Service
 public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 
 	@Autowired
 	private ServiceUser serviceUser;
-
-	@Autowired
-	private JsonToJava jsonToJavaObj;
-
+ 
 	@Override
 	public List<Purchas> getAllPurchases()  {
 		 
 		ArrayList<Purchas> listofAllPurchase = new ArrayList<>();
-		
-		 RestTemplate restTemplate = new RestTemplate();
+		RestTemplate restTemplate = new RestTemplate();
 	 
 		 for (String username : serviceUser.getUserName() ) {
-			String URL = "http://localhost:8000/api/purchases/by_user/"+username;
+			 String URL = "http://localhost:8000/api/purchases/by_user/"+username;
 		 
-			ArrayList<Purchas> purchasesByUsername =
-					restTemplate.getForObject(URL,HelperPurchasClass.class)
-					.getPurchases();
-		 
-			for (Purchas purchas : purchasesByUsername) {
-				listofAllPurchase.add(purchas);
-			}
+			ArrayList<Purchas> purchasesByUsername = loadPurchasesByUsername(restTemplate, URL);
+
+			loadAllPurchases(listofAllPurchase, purchasesByUsername);
 	 
 		 }
 		 
 		 
 		return listofAllPurchase;
  
+	}
+
+
+	private void loadAllPurchases(ArrayList<Purchas> listofAllPurchase, ArrayList<Purchas> purchasesByUsername) {
+		for (Purchas purchas : purchasesByUsername) {
+			listofAllPurchase.add(purchas);
+		}
+	}
+
+
+	private ArrayList<Purchas> loadPurchasesByUsername(RestTemplate restTemplate, String URL) {
+		ArrayList<Purchas> purchasesByUsername =
+				restTemplate.getForObject(URL,HelperPurchasClass.class)
+				.getPurchases();
+		return purchasesByUsername;
 	}
 
 

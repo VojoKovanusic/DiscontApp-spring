@@ -6,7 +6,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import com.app.entity.PopularPurchases;
-import com.app.json.JavaToJson;
 
 @Component
 public class ServiceOtherUsersWhoRecentlyPurchased {
