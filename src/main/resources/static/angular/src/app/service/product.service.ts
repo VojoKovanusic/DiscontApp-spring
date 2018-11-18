@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
 import { Product } from '../product';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ProductService implements OnInit {
@@ -15,19 +16,19 @@ export class ProductService implements OnInit {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.headers });
   private product: Product;
-  constructor(private http: Http) { }
+  constructor(private http: Http,private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.getAllProduct();
   }
-  getProductByID(id: number) {
-    return this.http.get(this.baseUrl + id, this.options).map((response: Response) => response.json()).
-      catch(this.errorHendler);
+  getProductByID(id: number) : Observable<Product>{
+   
+    return this.httpClient.get<Product>(this.baseUrl + id) ;
   }
 
-  getAllProduct() {
-    return this.http.get(this.baseUrl, this.options).map((response: Response) => response.json()).
-      catch(this.errorHendler);
+  getAllProduct() : Observable<Product[]> {
+     
+    return this.httpClient.get<Product[]>(this.baseUrl) 
   }
 
   errorHendler(error: Response) {

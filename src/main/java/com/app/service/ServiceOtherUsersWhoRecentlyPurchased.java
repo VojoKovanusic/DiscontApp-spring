@@ -15,31 +15,26 @@ public class ServiceOtherUsersWhoRecentlyPurchased {
 	private ServicePopularPurchases popularService;
 
 	@Cacheable(value = "popularP", key = "#username")
-	public ArrayList<String> usersWhoRecentlyPurchased(String username) {
-		System.out.println("*************Test cache*******usersWhoRecentlyPurchased");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-		}
-		ArrayList<PopularPurchases> all = popularService.popular();
+	public ArrayList<PopularPurchases> usersWhoRecentlyPurchased(String username) {
 
-		ArrayList<String> sameProduct = new ArrayList<>();
+		ArrayList<PopularPurchases> buySameProduct = new ArrayList<>();
 
-		for (PopularPurchases objFromAll : all) {
+		for (PopularPurchases popularPurchases : popularService.listOfPopularPurchases()) {
 
-			if (isContainsUsername(objFromAll.getRecentUserNames(), username)) {
-				objFromAll.getRecentUserNames().remove(username);
+			//if there is already a username which bought, I delete it from the list  
+			if (isContainsUsername(popularPurchases.getRecentUserNames(), username)) {
+				popularPurchases.getRecentUserNames().remove(username);
 				
-				sameProduct.add(JavaToJson.convertJavaToJSON(objFromAll));
+				buySameProduct.add((popularPurchases));
 			}
 		}
-		return sameProduct;
+		return buySameProduct;
 
 	}
 
-	private boolean isContainsUsername(ArrayList<String> names, String username) {
+	private boolean isContainsUsername(ArrayList<String> allUsernames, String username) {
 
-		for (String name : names) {
+		for (String name : allUsernames) {
 			if (name.equals(username))
 				return true;
 		}

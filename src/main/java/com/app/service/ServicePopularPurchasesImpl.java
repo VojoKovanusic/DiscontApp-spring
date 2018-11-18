@@ -22,24 +22,27 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 	private ServiceProducts serviceProducts;
 
 	@Override
-	// @Cacheable("popular")
-	public ArrayList<PopularPurchases> popular() {
+	@Cacheable("popular")
+	public ArrayList<PopularPurchases> listOfPopularPurchases() {
 
 		ArrayList<PopularPurchases> popularList = new ArrayList<>();
 
-		for (Product product : serviceProducts.getAllProducts()) {
-			popularList.add(new PopularPurchases(product));
-		}
+		fillPopularPurchasesListWhithProducts(popularList);
 
 		for (PopularPurchases popularPurchases : popularList) {
+			
 			try {
 				for (Purchas purchas : userService.getAllPurchases()) {
+					
 					if (popularPurchases.getProduct().getId()==(purchas.getProductId()))
-						popularPurchases.getRecentUserNames().add(purchas.getUsername());
+					{
+						popularPurchases.getRecentUserNames()
+						.add(purchas.getUsername());
+					}
 				}
+				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+
 			}
 		}
 
@@ -47,22 +50,12 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 		return popularList;
 	}
 
-	private ArrayList<String> convertJavaObjectToJson(ArrayList<PopularPurchases> list) {
-		ArrayList<String> jsonList = new ArrayList<>();
-		for (PopularPurchases purchas : list) {
-			String jsonFormat = JavaToJson.convertJavaToJSON(purchas);
-			jsonList.add(jsonFormat);
+	private void fillPopularPurchasesListWhithProducts(ArrayList<PopularPurchases> popularList) {
+		for (Product product : serviceProducts.getAllProducts()) {
+			popularList.add(new PopularPurchases(product));
 		}
-		return jsonList;
 	}
-
-	@Override
-	@Cacheable("popular")
-	public String popularJson() {
-		ArrayList<PopularPurchases> popularJson = popular();
-		return convertJavaObjectToJson(popularJson).toString();
-	}
-
+ 
 	@CacheEvict("popular")
 	public void cacheEvictAccounts() {
 

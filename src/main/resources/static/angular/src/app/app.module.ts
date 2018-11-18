@@ -18,21 +18,17 @@ import { AllProductsComponent } from './all-products/all-products.component';
 import { LikeComponent } from './like/like.component';
 import { MyNavbarComponent } from './my-navbar/my-navbar.component';
 import { NotfoundComponentComponent } from './notfound-component/notfound-component.component';
-
-import { hasLifecycleHook } from '@angular/compiler/src/lifecycle_reflector';
-import { getDebugNode } from '@angular/core/src/debug/debug_node';
-import { formGroupNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { HomeComponent } from './home/home.component';
 import { TaskComponent } from './task/task.component';
 import { HowRunComponent } from './how-run/how-run.component';
 import { MySolutionComponent } from './my-solution/my-solution.component';
 import { AboutAutorComponent } from './about-autor/about-autor.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 const appRoutes: Routes = [
-/* { path: '', component: ListPurchasComponent},
-  { path: '', component: ProductByIdComponent}  */
+ 
 
 ]
 @NgModule({
@@ -51,10 +47,12 @@ const appRoutes: Routes = [
     HowRunComponent,
     MySolutionComponent,
     AboutAutorComponent,
-    AddProductComponent
+    AddProductComponent,
+    
 
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     HttpModule,
     FormsModule,

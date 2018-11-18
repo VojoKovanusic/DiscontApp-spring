@@ -1,9 +1,12 @@
 package com.app.service;
 
-import java.util.List;
+import java.util.ArrayList;
+
+import com.app.entity.Purchas;
+ 
 
 public interface ServicePurchaBbyProduct {
 
-	List<String> peopleWhoPreviouslyPurchasedProduct(int productId);
+	ArrayList<Purchas>  peopleWhoPreviouslyPurchasedProduct(int productId);
 
 }

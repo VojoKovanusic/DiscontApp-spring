@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.app.entity.PopularPurchases;
 import com.app.entity.Product;
+import com.app.entity.Purchas;
 import com.app.service.ServiceOtherUsersWhoRecentlyPurchased;
 import com.app.service.ServiceProducts;
 import com.app.service.ServicePurchaBbyProduct;
@@ -30,7 +32,7 @@ public class Controller {
 	@Autowired
 	private ServicePurchasesByUser servicePurchasesByUser;
 	@Autowired
-	private ServicePurchaBbyProduct purchasesByProduct;
+	private ServicePurchaBbyProduct purchasesByProductService;
 	@Autowired
 	private ServiceProducts serviceProduct;
 	@Autowired
@@ -38,35 +40,33 @@ public class Controller {
 
 	// fetch 5 recent purchases for the user, oreder by date
 	@RequestMapping(path = "api/purchases/by_user/{username:.+}", method = RequestMethod.GET)
-	public String allPurchasesByUser(@PathVariable String username) throws IOException {
+	public ArrayList<Purchas> allPurchasesByUser(@PathVariable String username) throws IOException {
 
-		ArrayList<String> listpurchase = servicePurchasesByUser.getPurchasesByUsername(username);
-
-		return listpurchase.toString();
+		return  servicePurchasesByUser.getPurchasesByUsername(username); 
 
 	}
 
 	// list of all people who previously purchased that product
 	@RequestMapping(path = "api/purchases/by_product/{product_id}", method = RequestMethod.GET)
-	public String peopleWhoPreviouslyPurchasedProduct(@PathVariable int product_id) {
+	public ArrayList<Purchas>  peopleWhoPreviouslyPurchasedProduct(@PathVariable int product_id) {
 
-		List<String> listpurchase = purchasesByProduct.peopleWhoPreviouslyPurchasedProduct(product_id);
+	 
 
-		return listpurchase.toString();
+		return  purchasesByProductService.peopleWhoPreviouslyPurchasedProduct(product_id);
 
 	}
 
 	@RequestMapping(path = "api/products/{product_id}", method = RequestMethod.GET)
-	public String getProductByID(@PathVariable int product_id) {
+	public Product getProductByID(@PathVariable int product_id) {
 
 		return serviceProduct.getProductById(product_id);
 
 	}
 
 	@RequestMapping(path = "/api/recent_purchases/{username:.+}", method = RequestMethod.GET)
-	public String recentPurchasesByUsername(@PathVariable String username) {
+	public ArrayList<PopularPurchases> recentPurchasesByUsername(@PathVariable String username) {
 
-		return service.usersWhoRecentlyPurchased(username).toString();
+		return service.usersWhoRecentlyPurchased(username) ;
 	}
 
 	@RequestMapping(path = "api/products/", method = RequestMethod.GET)

@@ -21,17 +21,18 @@ export class ProductByIdComponent {
   constructor(private service: ProductService) { }
 
   getProductByID() {
+ 
     this.product = new Product();
     return this.service.getProductByID(this.id)
       .subscribe(product => {
         this.product = product;
-        console.log(this.product);
+       
       },
-      // tslint:disable-next-line:no-shadowed-variable
+       
       error => { console.log(error); });
   }
   isNull() {
-    // tslint:disable-next-line:curly
+ 
     if (this.product.isNull)
       return true;
   }

@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,10 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import com.app.entity.Purchas;
 import com.app.entity.User;
 import com.app.json.JavaToJson;
 import com.app.json.JsonToJava;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
 public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
@@ -23,45 +27,47 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 	private JsonToJava jsonToJavaObj;
 
 	@Override
-	public List<Purchas> getAllPurchases() throws IOException {
+	public List<Purchas> getAllPurchases()  {
+		 
+		ArrayList<Purchas> listofAllPurchase = new ArrayList<>();
 		
-		ArrayList<Purchas> allPurchases = new ArrayList<>();
-		
-		for (User user : serviceUser.getUsers()) {
-			ArrayList<Purchas> list = jsonToJavaObj.getPurchasesByName(user.getUsername());
-			{
-				for (Purchas purchas : list) {
-					allPurchases.add(purchas);
-				}
+		 RestTemplate restTemplate = new RestTemplate();
+	 
+		 for (String username : serviceUser.getUserName() ) {
+			String URL = "http://localhost:8000/api/purchases/by_user/"+username;
+		 
+			ArrayList<Purchas> purchasesByUsername =
+					restTemplate.getForObject(URL,HelperPurchasClass.class)
+					.getPurchases();
+		 
+			for (Purchas purchas : purchasesByUsername) {
+				listofAllPurchase.add(purchas);
 			}
-
-		}
-		return allPurchases;
+	 
+		 }
+		 
+		 
+		return listofAllPurchase;
+ 
 	}
 
 
 	@Override
 	@Cacheable(value = "purchasesByUsername", key = "#username")
-	public ArrayList<String> getPurchasesByUsername(String username) throws IOException {
-		System.out.println("*************Test cache*******getPurchasesByUsername(String username)");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-		}
-		ArrayList<Purchas> listpurchase = new ArrayList<>();
+	public ArrayList<Purchas> getPurchasesByUsername(String username) throws IOException {
+	 
+		String URL = "http://localhost:8000/api/purchases/by_user/"+username;
+		 RestTemplate restTemplate = new RestTemplate();
+		 
+		ArrayList<Purchas> purchasesByUsername =
+				restTemplate.getForObject(URL,HelperPurchasClass.class)
+				.getPurchases();
+		 
 
-		for (Purchas purchas : getAllPurchases()) {
-
-			if (purchas.getUsername().equals(username)) {
-				listpurchase.add(purchas);
-			}
-		}
-
-		return convertJavaObjectToJson(listpurchase);
+		return getFiveRecentPurchases(purchasesByUsername);
 	}
-
-	@Override
-	public ArrayList<Purchas> getFiveRecentPurchases(ArrayList<Purchas> listpurchase) {
+  
+	private ArrayList<Purchas> getFiveRecentPurchases(ArrayList<Purchas> listpurchase) {
 
 		ArrayList<Purchas> recentFive = new ArrayList<>();
 
@@ -75,18 +81,20 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 		return recentFive;
 	}
 
-	private ArrayList<String> convertJavaObjectToJson(ArrayList<Purchas> listpurchase) {
-		ArrayList<String> jsonList = new ArrayList<>();
-		
-		for (Purchas purchas : getFiveRecentPurchases(listpurchase)) {
-			String jsonFormat = JavaToJson.convertJavaToJSON(purchas);
-			jsonList.add(jsonFormat);
-		}
-		return jsonList;
-	}
-
 	@CacheEvict(value = "purchasesByUsername", key = "#username")
 	public void cacheEvict(String username) {
 
 	}
+
+}
+
+class HelperPurchasClass {
+	
+	@JsonProperty("purchases")
+	private ArrayList<Purchas>  purchases; 
+	
+	ArrayList<Purchas> getPurchases() {
+		return purchases;
+	}
+	
 }

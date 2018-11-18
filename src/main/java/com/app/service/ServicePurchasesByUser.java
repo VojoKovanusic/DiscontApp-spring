@@ -9,9 +9,9 @@ import com.app.entity.Purchas;
 
 public interface ServicePurchasesByUser {
 	
-	public ArrayList<Purchas> getFiveRecentPurchases(ArrayList<Purchas> list);	
+	 
 	
-	public ArrayList<String> getPurchasesByUsername(String username)throws IOException;
+	public ArrayList<Purchas> getPurchasesByUsername(String username)throws IOException;
 	
 	public List<Purchas> getAllPurchases()throws IOException ;
 }
