@@ -1,11 +1,11 @@
 package com.app.entity;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
-public class PopularPurchases implements Comparable<PopularPurchases>, Serializable {
+public class PopularPurchases implements Comparable<PopularPurchases> {
  
-	private static final long serialVersionUID = 1L;
+	
 	private Product product;
 	private ArrayList<String> recentUserNames;
 
@@ -32,9 +32,9 @@ public class PopularPurchases implements Comparable<PopularPurchases>, Serializa
 	}
 
 	@Override
-	public int compareTo(PopularPurchases o) {
+	public int compareTo(PopularPurchases popularPurchases) {
 		Integer recent = getRecentUserNames().size();
-		Integer recentNew = o.getRecentUserNames().size();
+		Integer recentNew = popularPurchases.getRecentUserNames().size();
 		return recentNew.compareTo(recent);
 	}
 

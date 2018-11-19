@@ -1,12 +1,7 @@
 package com.app.entity;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Product implements Serializable {
+public class Product  {
 
-
-	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String face;
 	private double price;
