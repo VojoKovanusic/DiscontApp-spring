@@ -41,7 +41,6 @@ public class Controller {
 	@RequestMapping(path = "api/purchases/by_product/{product_id}", method = RequestMethod.GET)
 	public ArrayList<Purchas>  peopleWhoPreviouslyPurchasedProduct(@PathVariable int product_id) {
 
-	 
 
 		return  purchasesByProductService.peopleWhoPreviouslyPurchasedProduct(product_id);
 

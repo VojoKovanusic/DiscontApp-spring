@@ -66,6 +66,18 @@ public class ServiceProductsImpl implements ServiceProducts {
 
 	}
 
+	@Override
+	public boolean deleteProduct(Long id) {
+		Product product =  getAllProducts()
+				.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
+		if (product != null) {
+			 remove(product);
+			
+		 return true;
+		}
+		return false;
+	}
+
 }
 
 class HelperProductsClass {
