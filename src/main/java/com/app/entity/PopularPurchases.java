@@ -1,36 +1,25 @@
 package com.app.entity;
 
-
 import java.util.ArrayList;
 
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+@ToString
+@RequiredArgsConstructor 
+@Getter
+@Setter
 public class PopularPurchases implements Comparable<PopularPurchases> {
+	@NonNull
+    Product product;
+	private ArrayList<String> recentUserNames= new ArrayList<>();
  
-	
-	private Product product;
-	private ArrayList<String> recentUserNames;
-
-	
-	public PopularPurchases(Product product) {
-	this.product = product;
-	recentUserNames=new ArrayList<>();
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
-	public ArrayList<String> getRecentUserNames() {
-		return recentUserNames;
-	}
-
-	public void setRecentUserNames(ArrayList<String> recentUserNames) {
-		this.recentUserNames = recentUserNames;
-	}
-
 	@Override
 	public int compareTo(PopularPurchases popularPurchases) {
 		Integer recent = getRecentUserNames().size();
@@ -38,9 +27,10 @@ public class PopularPurchases implements Comparable<PopularPurchases> {
 		return recentNew.compareTo(recent);
 	}
 
-	@Override
-	public String toString() {
-		return "PopularPurchases [product=" + product + ", recentUserNames=" + recentUserNames + "]";
-	}
+
+	
+
+
+ 
 
 }
