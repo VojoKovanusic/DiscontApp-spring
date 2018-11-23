@@ -28,14 +28,22 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 
 		fillPopularPurchasesListWhithProducts(popularList);
 
-		for (PopularPurchases popularPurchases : popularList) {
+		addUsernameInPopularPurchase(popularList);
+		
+		sortPopularPurchasesList(popularList);
+ 
+		return popularList;
+	}
+
+	private void addUsernameInPopularPurchase(ArrayList<PopularPurchases> popularList) {
+		for (PopularPurchases popularPurchase : popularList) {
 			
 			try {
 				for (Purchas purchas : userService.getAllPurchases()) {
 					
-					if (popularPurchases.getProduct().getId()==(purchas.getProductId()))
+					if (popularPurchase.getProduct().getId()==(purchas.getProductId()))
 					{
-						popularPurchases.getRecentUserNames()
+						popularPurchase.getRecentUserNames()
 						.add(purchas.getUsername());
 					}
 				}
@@ -44,9 +52,12 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 
 			}
 		}
+	}
 
-		Collections.sort(popularList);
-		return popularList;
+	private void sortPopularPurchasesList(ArrayList<PopularPurchases> popularList) {
+		Collections.sort(popularList, (o1, o2) -> {
+            return Integer.compare(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
+        });
 	}
 
 	private void fillPopularPurchasesListWhithProducts(ArrayList<PopularPurchases> popularList) {

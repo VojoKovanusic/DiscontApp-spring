@@ -17,11 +17,11 @@ public class ServiceProductsImpl implements ServiceProducts {
 	@Override
 	public List<Product> getAllProducts() {
 
-		final String uri = "http://localhost:8000/api/products";
+		final String path = "http://localhost:8000/api/products";
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		List<Product> products = restTemplate.getForObject(uri, HelperProductsClass.class).getProducts();
+		List<Product> products = restTemplate.getForObject(path, HelperProductsClass.class).getProducts();
 
 		return products;
 	}
