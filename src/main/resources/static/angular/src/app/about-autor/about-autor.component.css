@@ -1,1 +1,14 @@
- 
+.obojenKrug {
+    height: 35px;
+    width: 35px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+}
+.prazanKrug{
+    height: 35px;
+    width: 35px;
+    background-color: rgb(128, 128, 128);
+    border-radius: 50%;
+    display: inline-block;
+}
