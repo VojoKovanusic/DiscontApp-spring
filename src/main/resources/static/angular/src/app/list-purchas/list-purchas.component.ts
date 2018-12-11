@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Purchas } from './../purchas';
 import { PurchaseService } from '../service/purchase.service';
-import { error } from 'selenium-webdriver';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
 
 @Component({
