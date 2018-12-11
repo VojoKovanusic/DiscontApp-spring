@@ -1,6 +1,7 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -14,14 +15,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Service
 public class ServiceProductsImpl implements ServiceProducts {
 
+	final private String path = "http://localhost:8000/api/products";
+	
 	@Override
 	public List<Product> getAllProducts() {
 
-		final String path = "http://localhost:8000/api/products";
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		List<Product> products = restTemplate.getForObject(path, HelperProductsClass.class).getProducts();
+		List<Product> products = 
+				restTemplate.getForObject(path, HelperProductsClass.class)
+				.getProducts();
 
 		return products;
 	}
@@ -29,12 +33,13 @@ public class ServiceProductsImpl implements ServiceProducts {
 	@Override
 	@Cacheable(value = "product", key = "#id")
 	public Product getProductById(int id) {
-
-		for (Product product : getAllProducts()) {
-			if (product.getId() == id)
+		Product product =  
+				getAllProducts().stream()
+				.filter(user -> user.getId() == id)
+				.findFirst().orElse(null);
+		 
 				return product;
-		}
-		return null;
+	 
 	}
 
 	@CacheEvict(value = "product", key = "#id")
@@ -43,10 +48,11 @@ public class ServiceProductsImpl implements ServiceProducts {
 
 	@Override
 	public void addProduct(Product product) {
+		
 		long id = getAllProducts().size() + 1;
 		product.setId(id);
-		getAllProducts().add(product);
 
+		getAllProducts().add(product); 
 	}
 
 	@Override
@@ -56,25 +62,36 @@ public class ServiceProductsImpl implements ServiceProducts {
 	}
 
 	@Override
-	public void updateProduct(Product product) {
+	public void updateProduct(Long id,Product product) {
+		Product productForModification=findProduct(id);
+		 setFacePriceSize( product, productForModification); 
+	}
 
-		Product modifiedProduct = getAllProducts().stream().filter(p -> p.getId() == product.getId()).findFirst()
+	private void setFacePriceSize(Product product, Product productForModification) {
+		productForModification.setFace(product.getFace());
+		productForModification.setPrice(product.getPrice());
+		productForModification.setSize(product.getSize());
+		 
+	}
+
+	private Product findProduct(Long id ) {
+		Product modifiedProduct = 
+				getAllProducts().stream()
+				.filter(p -> p.getId().equals(id)).findFirst()
 				.orElse(null);
-		modifiedProduct.setFace(product.getFace());
-		modifiedProduct.setPrice(product.getPrice());
-		modifiedProduct.setSize(product.getSize());
-
+		 
+		return modifiedProduct;
 	}
 
 	@Override
 	public boolean deleteProduct(Long id) {
-		Product product =  getAllProducts()
-				.stream().filter(user -> user.getId() == id).findFirst().orElse(null);
+		Product product =findProduct(id);
+		
 		if (product != null) {
 			 remove(product);
-			
 		 return true;
 		}
+	 
 		return false;
 	}
 

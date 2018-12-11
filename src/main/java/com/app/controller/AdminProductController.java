@@ -20,15 +20,16 @@ public class AdminProductController {
 
 	@PostMapping(path = "/product")
 	public Product addProduct(@RequestBody Product product) {
-
+ 
 		serviceproduct.addProduct(product);
 
 		return product;
 	}
 
-	@PutMapping(path = "/product")
-	public Product updateProduct(@RequestBody Product product) {
-		serviceproduct.updateProduct(product);
+	@PutMapping(path = "/product/{id}")
+	public Product updateProduct(@PathVariable Long id,@RequestBody Product product) {
+	
+		serviceproduct.updateProduct(id,product);
 
 		return product;
 	}

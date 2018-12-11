@@ -5,20 +5,28 @@
 <body>
   
  <h2>
-Korištene Tehnologije
+I used the following technology:
  </h2>
- 
- Kao temelj projekta poslužio je <b>Spring RESTful</b> sa svojim pratećim servisima, kontrolerima.... Konfiguraciju Springa sam izvršaio pomoć <strong>Spring boot-a</strong>. Za frontend tehnologiju poslužio mi je Angular, ove novije verzije, ne JS.
- 
-Ovo je moj prvi dodir sa front tehnologijama, koji sam iskoristio da pokušam nadograditi ovaj
-      projekat.
+ <li>Spring RESTful</li>
+ <li>Angular</li>
 
-<hr>                                 
+
+
+For run application first:
+<a href="https://github.com/x-team/daw-purchases/archive/master.zip" target="_blank"><strong>Download project</strong></a> on your machine, unziped...!<br>
+ 
+ <br>
+<h4> Install and start the server</h4>
+<ul>
+  <li>install</li>
+  <li>npm start</li>        
+                 
   <h2>  Java exam</h2>
+  
                                            
                                            
 
-<strong>Overview</strong>
+<strong>Overview </strong><br>
 For this exam you will be building a backend for a new feature of the Discount Ascii Warehouse ecommerce platform.
 Your application will produce a list of "Popular purchases", so customers can see who else bought the same products as them. 
 To complete the exam your application will need to accept HTTP requests to /api/recent_purchases/:username and respond with a list of recently purchased products, and the names of other users who recently purchased them.
