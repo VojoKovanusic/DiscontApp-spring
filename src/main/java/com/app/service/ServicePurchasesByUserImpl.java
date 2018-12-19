@@ -12,36 +12,32 @@ import org.springframework.web.client.RestTemplate;
 import com.app.entity.Purchas;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
 @Service
 public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 
 	@Autowired
 	private ServiceUser serviceUser;
-	
+
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	@Override
-	public List<Purchas> getAllPurchases()  {
-		 
+	public List<Purchas> getAllPurchases() {
+
 		ArrayList<Purchas> listofAllPurchase = new ArrayList<>();
-	   
-	 
-		 for (String username : serviceUser.getUserName() ) {
-			 String URL = "http://localhost:8000/api/purchases/by_user/"+username;
-		 
+
+		for (String username : serviceUser.getUserNames()) {
+			String URL = "http://localhost:8000/api/purchases/by_user/" + username;
+
 			ArrayList<Purchas> purchasesByUsername = loadPurchasesByUsername(restTemplate, URL);
 
 			loadAllPurchases(listofAllPurchase, purchasesByUsername);
-	 
-		 }
-		 
-		 
-		return listofAllPurchase;
- 
-	}
 
+		}
+
+		return listofAllPurchase;
+
+	}
 
 	private void loadAllPurchases(ArrayList<Purchas> listofAllPurchase, ArrayList<Purchas> purchasesByUsername) {
 		for (Purchas purchas : purchasesByUsername) {
@@ -49,30 +45,25 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 		}
 	}
 
-
 	private ArrayList<Purchas> loadPurchasesByUsername(RestTemplate restTemplate, String URL) {
-		ArrayList<Purchas> purchasesByUsername =
-				restTemplate.getForObject(URL,HelperPurchasClass.class)
+		ArrayList<Purchas> purchasesByUsername = restTemplate.getForObject(URL, HelperPurchasClass.class)
 				.getPurchases();
 		return purchasesByUsername;
 	}
 
-
 	@Override
 	@Cacheable(value = "purchasesByUsername", key = "#username")
 	public ArrayList<Purchas> getPurchasesByUsername(String username) throws IOException {
-	 
-		String URL = "http://localhost:8000/api/purchases/by_user/"+username;
-		 RestTemplate restTemplate = new RestTemplate();
-		 
-		ArrayList<Purchas> purchasesByUsername =
-				restTemplate.getForObject(URL,HelperPurchasClass.class)
+
+		String URL = "http://localhost:8000/api/purchases/by_user/" + username;
+		RestTemplate restTemplate = new RestTemplate();
+
+		ArrayList<Purchas> purchasesByUsername = restTemplate.getForObject(URL, HelperPurchasClass.class)
 				.getPurchases();
-		 
 
 		return getFiveRecentPurchases(purchasesByUsername);
 	}
-  
+
 	private ArrayList<Purchas> getFiveRecentPurchases(ArrayList<Purchas> listpurchase) {
 
 		ArrayList<Purchas> recentFive = new ArrayList<>();
@@ -95,12 +86,12 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 }
 
 class HelperPurchasClass {
-	
+
 	@JsonProperty("purchases")
-	private ArrayList<Purchas>  purchases; 
-	
+	private ArrayList<Purchas> purchases;
+
 	ArrayList<Purchas> getPurchases() {
 		return purchases;
 	}
-	
+
 }

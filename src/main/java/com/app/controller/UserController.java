@@ -1,13 +1,16 @@
 package com.app.controller;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.app.entity.PopularPurchases;
 import com.app.entity.Product;
 import com.app.entity.Purchas;
@@ -33,16 +36,15 @@ public class UserController {
 	@RequestMapping(path = "api/purchases/by_user/{username:.+}", method = RequestMethod.GET)
 	public ArrayList<Purchas> allPurchasesByUser(@PathVariable String username) throws IOException {
 
-		return  servicePurchasesByUser.getPurchasesByUsername(username); 
+		return servicePurchasesByUser.getPurchasesByUsername(username);
 
 	}
 
 	// list of all people who previously purchased that product
 	@RequestMapping(path = "api/purchases/by_product/{product_id}", method = RequestMethod.GET)
-	public ArrayList<Purchas>  peopleWhoPreviouslyPurchasedProduct(@PathVariable int product_id) {
+	public ArrayList<Purchas> peopleWhoPreviouslyPurchasedProduct(@PathVariable int product_id) {
 
-
-		return  purchasesByProductService.peopleWhoPreviouslyPurchasedProduct(product_id);
+		return purchasesByProductService.peopleWhoPreviouslyPurchasedProduct(product_id);
 
 	}
 
@@ -56,7 +58,7 @@ public class UserController {
 	@RequestMapping(path = "/api/recent_purchases/{username:.+}", method = RequestMethod.GET)
 	public ArrayList<PopularPurchases> recentPurchasesByUsername(@PathVariable String username) {
 
-		return service.usersWhoRecentlyPurchased(username) ;
+		return service.usersWhoRecentlyPurchased(username);
 	}
 
 	@RequestMapping(path = "api/products/", method = RequestMethod.GET)
@@ -65,10 +67,5 @@ public class UserController {
 		return serviceProduct.getAllProducts();
 
 	}
-	
-	 
-	 
+
 }
-
-
- 

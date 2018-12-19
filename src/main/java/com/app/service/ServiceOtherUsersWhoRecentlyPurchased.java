@@ -22,10 +22,10 @@ public class ServiceOtherUsersWhoRecentlyPurchased {
 
 		for (PopularPurchases popularPurchases : popularService.listOfPopularPurchases()) {
 
-			//if there is already a username which bought, I delete it from the list  
+			// if there is already a username which bought, I delete it from the list
 			if (isContainsUsername(popularPurchases.getRecentUserNames(), username)) {
 				popularPurchases.getRecentUserNames().remove(username);
-				
+
 				buySameProduct.add((popularPurchases));
 			}
 		}

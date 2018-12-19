@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
- 
+
 import com.app.entity.Product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,15 +17,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ServiceProductsImpl implements ServiceProducts {
 	@Autowired
 	private RestTemplate restTemplate;
-	
-	final private String path = "http://localhost:8000/api/products";
-	
-	@Override
-	public List<Product> getAllProducts()   {
 
-		List<Product> products = 
-				restTemplate.getForObject(path, HelperProductsClass.class)
-				.getProducts();
+	final private String path = "http://localhost:8000/api/products";
+
+	@Override
+	public List<Product> getAllProducts() {
+
+		List<Product> products = restTemplate.getForObject(path, HelperProductsClass.class).getProducts();
 
 		return products;
 	}
@@ -33,13 +31,10 @@ public class ServiceProductsImpl implements ServiceProducts {
 	@Override
 	@Cacheable(value = "product", key = "#id")
 	public Product getProductById(int id) {
-		Product product =  
-				getAllProducts().stream()
-				.filter(user -> user.getId() == id)
-				.findFirst().orElse(null);
-		 
-				return product;
-	 
+		Product product = getAllProducts().stream().filter(user -> user.getId() == id).findFirst().orElse(null);
+
+		return product;
+
 	}
 
 	@CacheEvict(value = "product", key = "#id")
@@ -48,11 +43,11 @@ public class ServiceProductsImpl implements ServiceProducts {
 
 	@Override
 	public void addProduct(Product product) {
-		
+
 		long id = getAllProducts().size() + 1;
 		product.setId(id);
 
-		getAllProducts().add(product); 
+		getAllProducts().add(product);
 	}
 
 	@Override
@@ -62,36 +57,33 @@ public class ServiceProductsImpl implements ServiceProducts {
 	}
 
 	@Override
-	public void updateProduct(Long id,Product product) {
-		Product productForModification=findProduct(id);
-		 setFacePriceSize( product, productForModification); 
+	public void updateProduct(Long id, Product product) {
+		Product productForModification = findProduct(id);
+		setFacePriceSize(product, productForModification);
 	}
 
 	private void setFacePriceSize(Product product, Product productForModification) {
 		productForModification.setFace(product.getFace());
 		productForModification.setPrice(product.getPrice());
 		productForModification.setSize(product.getSize());
-		 
+
 	}
 
-	private Product findProduct(Long id ) {
-		Product modifiedProduct = 
-				getAllProducts().stream()
-				.filter(p -> p.getId().equals(id)).findFirst()
-				.orElse(null);
-		 
+	private Product findProduct(Long id) {
+		Product modifiedProduct = getAllProducts().stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+
 		return modifiedProduct;
 	}
 
 	@Override
 	public boolean deleteProduct(Long id) {
-		Product product =findProduct(id);
-		
+		Product product = findProduct(id);
+
 		if (product != null) {
-			 remove(product);
-		 return true;
+			remove(product);
+			return true;
 		}
-	 
+
 		return false;
 	}
 

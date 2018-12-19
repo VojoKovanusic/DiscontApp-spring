@@ -6,7 +6,5 @@ import com.app.entity.PopularPurchases;
 
 public interface ServicePopularPurchases {
 	ArrayList<PopularPurchases> listOfPopularPurchases();
- 
 
-	 
 }

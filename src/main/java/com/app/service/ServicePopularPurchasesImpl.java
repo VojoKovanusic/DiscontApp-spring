@@ -3,16 +3,15 @@ package com.app.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.app.entity.PopularPurchases;
 import com.app.entity.Product;
 import com.app.entity.Purchas;
-
 
 @Service
 public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
@@ -31,25 +30,23 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 		fillPopularPurchasesListWhithProducts(popularList);
 
 		addUsernameInPopularPurchase(popularList);
-		
+
 		sortPopularPurchasesList(popularList);
- 
+
 		return popularList;
 	}
 
 	private void addUsernameInPopularPurchase(ArrayList<PopularPurchases> popularList) {
 		for (PopularPurchases popularPurchase : popularList) {
-			
+
 			try {
 				for (Purchas purchas : userService.getAllPurchases()) {
-					
-					if (popularPurchase.getProduct().getId()==(purchas.getProductId()))
-					{
-						popularPurchase.getRecentUserNames()
-						.add(purchas.getUsername());
+
+					if (popularPurchase.getProduct().getId() == (purchas.getProductId())) {
+						popularPurchase.getRecentUserNames().add(purchas.getUsername());
 					}
 				}
-				
+
 			} catch (IOException e) {
 
 			}
@@ -58,8 +55,8 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 
 	private void sortPopularPurchasesList(ArrayList<PopularPurchases> popularList) {
 		Collections.sort(popularList, (o1, o2) -> {
-            return Integer.compare(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
-        });
+			return Integer.compare(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
+		});
 	}
 
 	private void fillPopularPurchasesListWhithProducts(ArrayList<PopularPurchases> popularList) {
@@ -67,7 +64,7 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 			popularList.add(new PopularPurchases(product));
 		}
 	}
- 
+
 	@CacheEvict("popular")
 	public void cacheEvict() {
 

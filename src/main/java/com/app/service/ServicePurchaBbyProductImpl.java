@@ -8,7 +8,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import com.app.entity.Purchas;
 
-
 @Service
 public class ServicePurchaBbyProductImpl implements ServicePurchaseByProduct {
 
@@ -21,19 +20,18 @@ public class ServicePurchaBbyProductImpl implements ServicePurchaseByProduct {
 
 		ArrayList<Purchas> purchase = new ArrayList<>();
 
-			try {
-				for (Purchas purchas : servicePurchasesByUser.getAllPurchases()) {
-					if (purchas.getProductId() == (productId)) {
-						purchase.add(purchas);
-					}
+		try {
+			for (Purchas purchas : servicePurchasesByUser.getAllPurchases()) {
+				if (purchas.getProductId() == (productId)) {
+					purchase.add(purchas);
 				}
-			} catch (IOException e) {
-
 			}
-			 
-			return  purchase  ;
+		} catch (IOException e) {
+
+		}
+
+		return purchase;
 	}
- 
 
 	@CacheEvict(value = "ppp", key = "#productId")
 	public void cacheEvict(String productId) {

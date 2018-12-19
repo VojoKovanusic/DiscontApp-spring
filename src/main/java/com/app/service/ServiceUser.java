@@ -5,9 +5,10 @@ import com.app.entity.User;
 
 public interface ServiceUser {
 
+	List<User> getUsers();
 
-	List<User>  getUsers();
-	List<String>  getUserName();
+	List<String> getUserNames();
+
 	void addUser(User user);
- 
+
 }
