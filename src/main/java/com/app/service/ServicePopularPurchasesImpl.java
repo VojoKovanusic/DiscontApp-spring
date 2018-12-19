@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import com.app.entity.PopularPurchases;
 import com.app.entity.Product;
 import com.app.entity.Purchas;
 
 
-@Component
+@Service
 public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 
 	@Autowired
@@ -67,7 +69,7 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 	}
  
 	@CacheEvict("popular")
-	public void cacheEvictAccounts() {
+	public void cacheEvict() {
 
 	}
 }

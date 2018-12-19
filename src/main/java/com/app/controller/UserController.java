@@ -13,17 +13,17 @@ import com.app.entity.Product;
 import com.app.entity.Purchas;
 import com.app.service.ServiceOtherUsersWhoRecentlyPurchased;
 import com.app.service.ServiceProducts;
-import com.app.service.ServicePurchaBbyProduct;
+import com.app.service.ServicePurchaseByProduct;
 import com.app.service.ServicePurchasesByUser;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-public class Controller {
+public class UserController {
 
 	@Autowired
 	private ServicePurchasesByUser servicePurchasesByUser;
 	@Autowired
-	private ServicePurchaBbyProduct purchasesByProductService;
+	private ServicePurchaseByProduct purchasesByProductService;
 	@Autowired
 	private ServiceProducts serviceProduct;
 	@Autowired

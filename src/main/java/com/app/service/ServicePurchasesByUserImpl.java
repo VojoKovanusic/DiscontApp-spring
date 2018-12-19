@@ -18,12 +18,15 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 
 	@Autowired
 	private ServiceUser serviceUser;
- 
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	@Override
 	public List<Purchas> getAllPurchases()  {
 		 
 		ArrayList<Purchas> listofAllPurchase = new ArrayList<>();
-		RestTemplate restTemplate = new RestTemplate();
+	   
 	 
 		 for (String username : serviceUser.getUserName() ) {
 			 String URL = "http://localhost:8000/api/purchases/by_user/"+username;

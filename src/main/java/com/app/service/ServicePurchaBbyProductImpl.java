@@ -10,7 +10,7 @@ import com.app.entity.Purchas;
 
 
 @Service
-public class ServicePurchaBbyProductImpl implements ServicePurchaBbyProduct {
+public class ServicePurchaBbyProductImpl implements ServicePurchaseByProduct {
 
 	@Autowired
 	private ServicePurchasesByUser servicePurchasesByUser;

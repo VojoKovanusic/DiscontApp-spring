@@ -3,25 +3,25 @@ package com.app.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
+ 
 import com.app.entity.Product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
 public class ServiceProductsImpl implements ServiceProducts {
-
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	final private String path = "http://localhost:8000/api/products";
 	
 	@Override
-	public List<Product> getAllProducts() {
-
-
-		RestTemplate restTemplate = new RestTemplate();
+	public List<Product> getAllProducts()   {
 
 		List<Product> products = 
 				restTemplate.getForObject(path, HelperProductsClass.class)
