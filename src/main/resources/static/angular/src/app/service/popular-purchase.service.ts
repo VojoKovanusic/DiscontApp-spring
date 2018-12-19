@@ -11,7 +11,7 @@ import { PopularPurchases } from '../popular-purchases';
 @Injectable()
 export class PopularPurchaseService {
 
-  private baseUrl: string = 'http://localhost:8080/api/recent_purchases/';
+  private baseUrl: string = 'http://localhost:8090/api/recent_purchases/';
   
   constructor(private http: HttpClient) { }
 

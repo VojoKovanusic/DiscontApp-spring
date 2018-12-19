@@ -11,7 +11,7 @@ import { Purchas } from '../purchas';
 @Injectable()
 export class PurchaseService {
 
-  private baseUrl: string = 'http://localhost:8080/api';
+  private baseUrl: string = 'http://localhost:8090/api';
 
   constructor(private httpClient: HttpClient) { }
 

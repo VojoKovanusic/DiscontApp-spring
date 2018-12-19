@@ -9,8 +9,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class ProductService implements OnInit {
 
-  private baseUrl: string = 'http://localhost:8080/api/products/';
-  private productUrl: string = 'http://localhost:8080/product/';
+  private baseUrl: string = 'http://localhost:8090/api/products/';
+  private productUrl: string = 'http://localhost:8090/product/';
 
   private product: Product;
   constructor(private httpClient: HttpClient) { }
