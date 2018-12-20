@@ -48,15 +48,14 @@ public class ServicePopularPurchaseImpl implements ServicePopularPurchase {
 				}
 
 			} catch (IOException e) {
-
+				System.out.println(e);
 			}
 		}
 	}
 
 	private void sortPopularPurchasesList(ArrayList<PopularPurchase> popularList) {
 		Collections.sort(popularList, (o1, o2) -> {
-			return Integer.compare
-					(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
+			return Integer.compare(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
 		});
 	}
 

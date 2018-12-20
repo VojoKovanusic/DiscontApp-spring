@@ -27,7 +27,7 @@ public class ServicePurchaBbyProductImpl implements ServicePurchaseByProduct {
 				}
 			}
 		} catch (IOException e) {
-
+			System.out.println(e);
 		}
 
 		return purchase;
