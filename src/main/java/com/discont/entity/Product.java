@@ -1,11 +1,11 @@
 package com.discont.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 @ToString
-
-@Data
+@Getter @Setter
 @NoArgsConstructor
 public class Product  {
 

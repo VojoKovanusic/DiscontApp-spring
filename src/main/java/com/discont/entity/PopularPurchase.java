@@ -2,14 +2,15 @@ package com.discont.entity;
 
 import java.util.ArrayList;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString
 @RequiredArgsConstructor
-@Data
+@Getter @Setter
 public class PopularPurchase {
 	@NonNull
 	Product product;

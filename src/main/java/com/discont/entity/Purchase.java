@@ -1,11 +1,12 @@
 package com.discont.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 @ToString
 @NoArgsConstructor
-@Data
+@Getter @Setter
 public class Purchase implements Comparable<Purchase> {
 
 	private Long purchasId;
