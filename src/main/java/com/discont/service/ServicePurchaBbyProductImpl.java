@@ -2,17 +2,19 @@ package com.discont.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.discont.entity.Purchase;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ServicePurchaBbyProductImpl implements ServicePurchaseByProduct {
 
-	@Autowired
 	private ServicePurchaseByUser servicePurchasesByUser;
 
 	@Override

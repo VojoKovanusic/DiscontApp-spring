@@ -1,18 +1,19 @@
 package com.discont.service;
 
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-
 import org.springframework.stereotype.Service;
 
 import com.discont.entity.PopularPurchase;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ServiceUsersWhoRecentlyPurchased {
 
-	@Autowired
 	private ServicePopularPurchase popularService;
 
 	@Cacheable(value = "popularP", key = "#username")
