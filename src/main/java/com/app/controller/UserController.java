@@ -11,30 +11,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.entity.PopularPurchases;
+import com.app.entity.PopularPurchase;
 import com.app.entity.Product;
-import com.app.entity.Purchas;
-import com.app.service.ServiceOtherUsersWhoRecentlyPurchased;
+import com.app.entity.Purchase;
+import com.app.service.ServiceUsersWhoRecentlyPurchased;
 import com.app.service.ServiceProducts;
 import com.app.service.ServicePurchaseByProduct;
-import com.app.service.ServicePurchasesByUser;
+import com.app.service.ServicePurchaseByUser;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class UserController {
 
 	@Autowired
-	private ServicePurchasesByUser servicePurchasesByUser;
+	private ServicePurchaseByUser servicePurchasesByUser;
 	@Autowired
 	private ServicePurchaseByProduct purchasesByProductService;
 	@Autowired
 	private ServiceProducts serviceProduct;
 	@Autowired
-	private ServiceOtherUsersWhoRecentlyPurchased service;
+	private ServiceUsersWhoRecentlyPurchased service;
 
 	// fetch 5 recent purchases for the user, oreder by date
 	@RequestMapping(path = "api/purchases/by_user/{username:.+}", method = RequestMethod.GET)
-	public ArrayList<Purchas> allPurchasesByUser(@PathVariable String username) throws IOException {
+	public ArrayList<Purchase> allPurchasesByUser(@PathVariable String username) throws IOException {
 
 		return servicePurchasesByUser.getPurchasesByUsername(username);
 
@@ -42,7 +42,7 @@ public class UserController {
 
 	// list of all people who previously purchased that product
 	@RequestMapping(path = "api/purchases/by_product/{product_id}", method = RequestMethod.GET)
-	public ArrayList<Purchas> peopleWhoPreviouslyPurchasedProduct(@PathVariable int product_id) {
+	public ArrayList<Purchase> peopleWhoPreviouslyPurchasedProduct(@PathVariable int product_id) {
 
 		return purchasesByProductService.peopleWhoPreviouslyPurchasedProduct(product_id);
 
@@ -56,7 +56,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "/api/recent_purchases/{username:.+}", method = RequestMethod.GET)
-	public ArrayList<PopularPurchases> recentPurchasesByUsername(@PathVariable String username) {
+	public ArrayList<PopularPurchase> recentPurchasesByUsername(@PathVariable String username) {
 
 		return service.usersWhoRecentlyPurchased(username);
 	}

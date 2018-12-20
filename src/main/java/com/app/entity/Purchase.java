@@ -1,20 +1,12 @@
 package com.app.entity;
 
-import java.util.ArrayList;
-
-
-
-import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
 import lombok.ToString;
 @ToString
 @NoArgsConstructor
-@Getter
-@Setter
-public class Purchas implements Comparable<Purchas> {
+@Data
+public class Purchase implements Comparable<Purchase> {
 
 	private Long purchasId;
 	private String username;
@@ -23,7 +15,7 @@ public class Purchas implements Comparable<Purchas> {
 
   
 	@Override
-	public int compareTo(Purchas o) {
+	public int compareTo(Purchase o) {
 
 		return o.getDate().compareTo(getDate());
 	}

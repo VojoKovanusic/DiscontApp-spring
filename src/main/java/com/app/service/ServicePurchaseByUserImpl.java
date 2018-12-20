@@ -9,11 +9,11 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.app.entity.Purchas;
+import com.app.entity.Purchase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
-public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
+public class ServicePurchaseByUserImpl implements ServicePurchaseByUser {
 
 	@Autowired
 	private ServiceUser serviceUser;
@@ -22,14 +22,14 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 	private RestTemplate restTemplate;
 
 	@Override
-	public List<Purchas> getAllPurchases() {
+	public List<Purchase> getAllPurchases() {
 
-		ArrayList<Purchas> listofAllPurchase = new ArrayList<>();
+		ArrayList<Purchase> listofAllPurchase = new ArrayList<>();
 
 		for (String username : serviceUser.getUserNames()) {
 			String URL = "http://localhost:8000/api/purchases/by_user/" + username;
 
-			ArrayList<Purchas> purchasesByUsername = loadPurchasesByUsername(restTemplate, URL);
+			ArrayList<Purchase> purchasesByUsername = loadPurchasesByUsername(restTemplate, URL);
 
 			loadAllPurchases(listofAllPurchase, purchasesByUsername);
 
@@ -39,34 +39,34 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 
 	}
 
-	private void loadAllPurchases(ArrayList<Purchas> listofAllPurchase, ArrayList<Purchas> purchasesByUsername) {
-		for (Purchas purchas : purchasesByUsername) {
+	private void loadAllPurchases(ArrayList<Purchase> listofAllPurchase, ArrayList<Purchase> purchasesByUsername) {
+		for (Purchase purchas : purchasesByUsername) {
 			listofAllPurchase.add(purchas);
 		}
 	}
 
-	private ArrayList<Purchas> loadPurchasesByUsername(RestTemplate restTemplate, String URL) {
-		ArrayList<Purchas> purchasesByUsername = restTemplate.getForObject(URL, HelperPurchasClass.class)
+	private ArrayList<Purchase> loadPurchasesByUsername(RestTemplate restTemplate, String URL) {
+		ArrayList<Purchase> purchasesByUsername = restTemplate.getForObject(URL, HelperPurchasClass.class)
 				.getPurchases();
 		return purchasesByUsername;
 	}
 
 	@Override
 	@Cacheable(value = "purchasesByUsername", key = "#username")
-	public ArrayList<Purchas> getPurchasesByUsername(String username) throws IOException {
+	public ArrayList<Purchase> getPurchasesByUsername(String username) throws IOException {
 
 		String URL = "http://localhost:8000/api/purchases/by_user/" + username;
 		RestTemplate restTemplate = new RestTemplate();
 
-		ArrayList<Purchas> purchasesByUsername = restTemplate.getForObject(URL, HelperPurchasClass.class)
+		ArrayList<Purchase> purchasesByUsername = restTemplate.getForObject(URL, HelperPurchasClass.class)
 				.getPurchases();
 
 		return getFiveRecentPurchases(purchasesByUsername);
 	}
 
-	private ArrayList<Purchas> getFiveRecentPurchases(ArrayList<Purchas> listpurchase) {
+	private ArrayList<Purchase> getFiveRecentPurchases(ArrayList<Purchase> listpurchase) {
 
-		ArrayList<Purchas> recentFive = new ArrayList<>();
+		ArrayList<Purchase> recentFive = new ArrayList<>();
 
 		Collections.sort(listpurchase);
 
@@ -88,9 +88,9 @@ public class ServicePurchasesByUserImpl implements ServicePurchasesByUser {
 class HelperPurchasClass {
 
 	@JsonProperty("purchases")
-	private ArrayList<Purchas> purchases;
+	private ArrayList<Purchase> purchases;
 
-	ArrayList<Purchas> getPurchases() {
+	ArrayList<Purchase> getPurchases() {
 		return purchases;
 	}
 

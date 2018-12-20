@@ -7,20 +7,20 @@ import org.springframework.cache.annotation.Cacheable;
 
 import org.springframework.stereotype.Service;
 
-import com.app.entity.PopularPurchases;
+import com.app.entity.PopularPurchase;
 
 @Service
-public class ServiceOtherUsersWhoRecentlyPurchased {
+public class ServiceUsersWhoRecentlyPurchased {
 
 	@Autowired
-	private ServicePopularPurchases popularService;
+	private ServicePopularPurchase popularService;
 
 	@Cacheable(value = "popularP", key = "#username")
-	public ArrayList<PopularPurchases> usersWhoRecentlyPurchased(String username) {
+	public ArrayList<PopularPurchase> usersWhoRecentlyPurchased(String username) {
 
-		ArrayList<PopularPurchases> buySameProduct = new ArrayList<>();
+		ArrayList<PopularPurchase> buySameProduct = new ArrayList<>();
 
-		for (PopularPurchases popularPurchases : popularService.listOfPopularPurchases()) {
+		for (PopularPurchase popularPurchases : popularService.listOfPopularPurchases()) {
 
 			// if there is already a username which bought, I delete it from the list
 			if (isContainsUsername(popularPurchases.getRecentUserNames(), username)) {

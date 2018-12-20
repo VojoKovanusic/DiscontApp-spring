@@ -9,23 +9,23 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.app.entity.PopularPurchases;
+import com.app.entity.PopularPurchase;
 import com.app.entity.Product;
-import com.app.entity.Purchas;
+import com.app.entity.Purchase;
 
 @Service
-public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
+public class ServicePopularPurchaseImpl implements ServicePopularPurchase {
 
 	@Autowired
-	private ServicePurchasesByUser userService;
+	private ServicePurchaseByUser userService;
 	@Autowired
 	private ServiceProducts serviceProducts;
 
 	@Override
 	@Cacheable("popular")
-	public ArrayList<PopularPurchases> listOfPopularPurchases() {
+	public ArrayList<PopularPurchase> listOfPopularPurchases() {
 
-		ArrayList<PopularPurchases> popularList = new ArrayList<>();
+		ArrayList<PopularPurchase> popularList = new ArrayList<>();
 
 		fillPopularPurchasesListWhithProducts(popularList);
 
@@ -36,11 +36,11 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 		return popularList;
 	}
 
-	private void addUsernameInPopularPurchase(ArrayList<PopularPurchases> popularList) {
-		for (PopularPurchases popularPurchase : popularList) {
+	private void addUsernameInPopularPurchase(ArrayList<PopularPurchase> popularList) {
+		for (PopularPurchase popularPurchase : popularList) {
 
 			try {
-				for (Purchas purchas : userService.getAllPurchases()) {
+				for (Purchase purchas : userService.getAllPurchases()) {
 
 					if (popularPurchase.getProduct().getId() == (purchas.getProductId())) {
 						popularPurchase.getRecentUserNames().add(purchas.getUsername());
@@ -53,15 +53,15 @@ public class ServicePopularPurchasesImpl implements ServicePopularPurchases {
 		}
 	}
 
-	private void sortPopularPurchasesList(ArrayList<PopularPurchases> popularList) {
+	private void sortPopularPurchasesList(ArrayList<PopularPurchase> popularList) {
 		Collections.sort(popularList, (o1, o2) -> {
 			return Integer.compare(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
 		});
 	}
 
-	private void fillPopularPurchasesListWhithProducts(ArrayList<PopularPurchases> popularList) {
+	private void fillPopularPurchasesListWhithProducts(ArrayList<PopularPurchase> popularList) {
 		for (Product product : serviceProducts.getAllProducts()) {
-			popularList.add(new PopularPurchases(product));
+			popularList.add(new PopularPurchase(product));
 		}
 	}
 

@@ -6,22 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import com.app.entity.Purchas;
+import com.app.entity.Purchase;
 
 @Service
 public class ServicePurchaBbyProductImpl implements ServicePurchaseByProduct {
 
 	@Autowired
-	private ServicePurchasesByUser servicePurchasesByUser;
+	private ServicePurchaseByUser servicePurchasesByUser;
 
 	@Override
 	@Cacheable(value = "ppp", key = "#productId")
-	public ArrayList<Purchas> peopleWhoPreviouslyPurchasedProduct(int productId) {
+	public ArrayList<Purchase> peopleWhoPreviouslyPurchasedProduct(int productId) {
 
-		ArrayList<Purchas> purchase = new ArrayList<>();
+		ArrayList<Purchase> purchase = new ArrayList<>();
 
 		try {
-			for (Purchas purchas : servicePurchasesByUser.getAllPurchases()) {
+			for (Purchase purchas : servicePurchasesByUser.getAllPurchases()) {
 				if (purchas.getProductId() == (productId)) {
 					purchase.add(purchas);
 				}

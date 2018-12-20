@@ -14,7 +14,7 @@ import com.app.entity.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
-public class ServiceProductsImpl implements ServiceProducts {
+public class ServiceProductImpl implements ServiceProducts {
 	@Autowired
 	private RestTemplate restTemplate;
 
