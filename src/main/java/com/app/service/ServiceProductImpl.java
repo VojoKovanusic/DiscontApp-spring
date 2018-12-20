@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,18 @@ public class ServiceProductImpl implements ServiceProducts {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	final private String path = "http://localhost:8000/api/products";
 
+	@Value("${rest.purchase.url.purchase.user}")
+	private String purchaseByuserUrl;
+	
+	@Value("${rest.url.products}")
+	private String productsUrl;
 	@Override
 	public List<Product> getAllProducts() {
 
-		List<Product> products = restTemplate.getForObject(path, HelperProductsClass.class).getProducts();
+		List<Product> products = 
+				restTemplate.getForObject(productsUrl, HelperProductsClass.class)
+				.getProducts();
 
 		return products;
 	}

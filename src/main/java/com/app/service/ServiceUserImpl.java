@@ -4,24 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.app.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 @Service
 public class ServiceUserImpl implements ServiceUser {
 
 	@Autowired
 	private RestTemplate restTemplate;
-
+	
+	 @Value(("${rest.users.username}"))
+	 private String usersByUsernameUrl;
+	 
 	@Override
 	public ArrayList<User> getUsers() {
 
-		final String uri = "http://localhost:8000/api/users";
+		 
 
-		List<User> usersList = restTemplate.getForObject(uri, HelperUserClass.class).getUsers();
+		List<User> usersList = restTemplate.getForObject(usersByUsernameUrl, HelperUserClass.class).getUsers();
 
 		return (ArrayList<User>) usersList;
 

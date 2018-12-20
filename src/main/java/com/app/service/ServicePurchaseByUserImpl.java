@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -21,13 +22,17 @@ public class ServicePurchaseByUserImpl implements ServicePurchaseByUser {
 	@Autowired
 	private RestTemplate restTemplate;
 
+	@Value("${rest.purchase.url.purchase.user}")
+	private String purchaseByUserUrl;
+	
+	
 	@Override
 	public List<Purchase> getAllPurchases() {
 
 		ArrayList<Purchase> listofAllPurchase = new ArrayList<>();
 
 		for (String username : serviceUser.getUserNames()) {
-			String URL = "http://localhost:8000/api/purchases/by_user/" + username;
+			String URL =  purchaseByUserUrl.replace("{username}", username) ;
 
 			ArrayList<Purchase> purchasesByUsername = loadPurchasesByUsername(restTemplate, URL);
 
@@ -55,8 +60,8 @@ public class ServicePurchaseByUserImpl implements ServicePurchaseByUser {
 	@Cacheable(value = "purchasesByUsername", key = "#username")
 	public ArrayList<Purchase> getPurchasesByUsername(String username) throws IOException {
 
-		String URL = "http://localhost:8000/api/purchases/by_user/" + username;
-		RestTemplate restTemplate = new RestTemplate();
+		String URL =  purchaseByUserUrl.replace("{username}", username) ;
+		 
 
 		ArrayList<Purchase> purchasesByUsername = restTemplate.getForObject(URL, HelperPurchasClass.class)
 				.getPurchases();
