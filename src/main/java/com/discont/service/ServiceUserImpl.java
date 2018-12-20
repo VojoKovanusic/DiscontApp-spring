@@ -3,6 +3,7 @@ package com.discont.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -10,16 +11,19 @@ import org.springframework.web.client.RestTemplate;
 import com.discont.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class ServiceUserImpl implements ServiceUser {
 
 	private RestTemplate restTemplate;
 
 	@Value(("${rest.users.username}"))
 	private String usersByUsernameUrl;
+
+	@Autowired
+	public ServiceUserImpl(RestTemplate restTemplate) {
+
+		this.restTemplate = restTemplate;
+	}
 
 	@Override
 	public ArrayList<User> getUsers() {

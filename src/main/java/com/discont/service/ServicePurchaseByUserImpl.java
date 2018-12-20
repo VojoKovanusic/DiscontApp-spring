@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -26,6 +27,13 @@ public class ServicePurchaseByUserImpl implements ServicePurchaseByUser {
 
 	@Value("${rest.purchase.url.purchase.user}")
 	private String purchaseByUserUrl;
+
+	@Autowired
+	public ServicePurchaseByUserImpl(ServiceUser serviceUser, RestTemplate restTemplate) {
+	 
+		this.serviceUser = serviceUser;
+		this.restTemplate = restTemplate;
+	}
 
 	@Override
 	public List<Purchase> getAllPurchases() {

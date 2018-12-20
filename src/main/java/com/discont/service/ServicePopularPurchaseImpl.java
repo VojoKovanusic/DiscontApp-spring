@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -12,15 +13,19 @@ import com.discont.entity.PopularPurchase;
 import com.discont.entity.Product;
 import com.discont.entity.Purchase;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class ServicePopularPurchaseImpl implements ServicePopularPurchase {
 
 	private ServicePurchaseByUser userService;
 
 	private ServiceProducts serviceProducts;
+
+	@Autowired
+	public ServicePopularPurchaseImpl(ServicePurchaseByUser userService, ServiceProducts serviceProducts) {
+
+		this.userService = userService;
+		this.serviceProducts = serviceProducts;
+	}
 
 	@Override
 	@Cacheable("popular")
