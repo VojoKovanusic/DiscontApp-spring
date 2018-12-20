@@ -1,4 +1,4 @@
-package com.app.service;
+package com.discont.service;
 
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 
 import org.springframework.stereotype.Service;
 
-import com.app.entity.PopularPurchase;
+import com.discont.entity.PopularPurchase;
 
 @Service
 public class ServiceUsersWhoRecentlyPurchased {

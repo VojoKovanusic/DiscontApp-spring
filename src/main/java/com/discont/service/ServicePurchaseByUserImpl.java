@@ -1,4 +1,4 @@
-package com.app.service;
+package com.discont.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,7 +10,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.app.entity.Purchase;
+
+import com.discont.entity.Purchase;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service

@@ -9,17 +9,17 @@ import { Purchas } from '../purchas';
 @Injectable()
 export class PurchaseService {
 
-  private baseUrl: string = 'http://localhost:8090/api';
+  private baseUrl: string = 'http://localhost:8090/discont.com';
 
   constructor(private httpClient: HttpClient) { }
 
   allPurchasesByUser(userName: string): Observable<Purchas[]> {
-    return this.httpClient.get<Purchas[]>(this.baseUrl + '/purchases/by_user/' + userName)
+    return this.httpClient.get<Purchas[]>(this.baseUrl + '/purchases/by-user/' + userName)
   }
 
   peopleWhoPreviouslyPurchasedProduct(id: Number): Observable<Purchas[]> {
 
-    return this.httpClient.get<Purchas[]>(this.baseUrl + '/purchases/by_product/' + id)
+    return this.httpClient.get<Purchas[]>(this.baseUrl + '/purchases/by-product/' + id)
   }
 
 }

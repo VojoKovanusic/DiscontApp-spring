@@ -1,4 +1,4 @@
-package com.app.service;
+package com.discont.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,8 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.app.entity.Product;
-
+import com.discont.entity.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service

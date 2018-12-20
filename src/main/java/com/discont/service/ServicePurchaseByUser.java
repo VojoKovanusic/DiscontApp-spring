@@ -1,10 +1,10 @@
-package com.app.service;
+package com.discont.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.app.entity.Purchase;
+import com.discont.entity.Purchase;
 
 public interface ServicePurchaseByUser {
 

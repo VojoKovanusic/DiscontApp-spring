@@ -1,8 +1,8 @@
-package com.app.service;
+package com.discont.service;
 
 import java.util.ArrayList;
 
-import com.app.entity.Purchase;
+import com.discont.entity.Purchase;
 
 public interface ServicePurchaseByProduct {
 

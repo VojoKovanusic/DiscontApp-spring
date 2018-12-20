@@ -1,7 +1,8 @@
-package com.app.service;
+package com.discont.service;
 
 import java.util.List;
-import com.app.entity.User;
+
+import com.discont.entity.User;
 
 public interface ServiceUser {
 

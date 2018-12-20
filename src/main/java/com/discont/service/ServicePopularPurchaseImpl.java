@@ -1,4 +1,4 @@
-package com.app.service;
+package com.discont.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.app.entity.PopularPurchase;
-import com.app.entity.Product;
-import com.app.entity.Purchase;
+import com.discont.entity.PopularPurchase;
+import com.discont.entity.Product;
+import com.discont.entity.Purchase;
 
 @Service
 public class ServicePopularPurchaseImpl implements ServicePopularPurchase {

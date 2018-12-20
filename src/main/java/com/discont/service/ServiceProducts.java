@@ -1,8 +1,8 @@
-package com.app.service;
+package com.discont.service;
 
 import java.util.List;
 
-import com.app.entity.Product;
+import com.discont.entity.Product;
 
 public interface ServiceProducts {
 

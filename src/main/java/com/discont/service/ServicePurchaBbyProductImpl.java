@@ -1,4 +1,4 @@
-package com.app.service;
+package com.discont.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import com.app.entity.Purchase;
+
+import com.discont.entity.Purchase;
 
 @Service
 public class ServicePurchaBbyProductImpl implements ServicePurchaseByProduct {

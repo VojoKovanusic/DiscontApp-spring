@@ -1,4 +1,4 @@
-package com.app.entity;
+package com.discont.entity;
 
 import java.util.ArrayList;
 

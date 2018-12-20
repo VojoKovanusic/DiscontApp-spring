@@ -1,4 +1,4 @@
-package com.app.service;
+package com.discont.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.app.entity.User;
+import com.discont.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 @Service
 public class ServiceUserImpl implements ServiceUser {
