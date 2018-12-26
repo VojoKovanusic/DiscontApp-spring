@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.discont.entity.Product;
-import com.discont.service.ServiceProducts;
+import com.discont.service.ProductService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
-public class AdminProductController {
+public class CRUDController {
 
 	@Autowired
-	ServiceProducts serviceproduct;
+	ProductService productService;
 
 	@PostMapping(path = "api.discont.com/product")
 	public Product addProduct(@RequestBody Product product) {
 
-		serviceproduct.addProduct(product);
+		productService.addProduct(product);
 
 		return product;
 	}
@@ -30,7 +30,7 @@ public class AdminProductController {
 	@PutMapping(path = "api.discont.com/product/{id}")
 	public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
 
-		serviceproduct.updateProduct(id, product);
+		productService.updateProduct(id, product);
 
 		return product;
 	}
@@ -38,7 +38,7 @@ public class AdminProductController {
 	@DeleteMapping(value = "api.discont.com/product/{id}")
 	public void deleteProduct(@PathVariable Long id) {
 
-		serviceproduct.deleteProduct(id);
+		productService.deleteProduct(id);
 	}
 
 }

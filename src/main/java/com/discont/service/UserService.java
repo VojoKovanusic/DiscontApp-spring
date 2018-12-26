@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.discont.entity.User;
 
-public interface ServiceUser {
+public interface UserService {
 
 	List<User> getUsers();
 

@@ -19,9 +19,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ServicePurchaseByUserImpl implements ServicePurchaseByUser {
+public class PurchaseServiceImpl implements PurchaseService {
 
-	private ServiceUser serviceUser;
+	private UserService serviceUser;
 
 	private RestTemplate restTemplate;
 
@@ -29,7 +29,7 @@ public class ServicePurchaseByUserImpl implements ServicePurchaseByUser {
 	private String purchaseByUserUrl;
 
 	@Autowired
-	public ServicePurchaseByUserImpl(ServiceUser serviceUser, RestTemplate restTemplate) {
+	public PurchaseServiceImpl(UserService serviceUser, RestTemplate restTemplate) {
 	 
 		this.serviceUser = serviceUser;
 		this.restTemplate = restTemplate;
@@ -87,14 +87,34 @@ public class ServicePurchaseByUserImpl implements ServicePurchaseByUser {
 			return listpurchase;
 		for (int i = 0; i < 5; i++) {
 			recentFive.add(listpurchase.get(i));
-		}
+		} 
 		return recentFive;
 	}
+	
+	@Override
+	@Cacheable(value = "ppp", key = "#productId")
+	public ArrayList<Purchase> peopleWhoPreviouslyPurchasedProduct(int productId) {
 
+		ArrayList<Purchase> purchase = new ArrayList<>();
+
+		for (Purchase purchas : getAllPurchases()) {
+			if (purchas.getProductId() == (productId)) {
+				purchase.add(purchas);
+			}
+		} 
+		return purchase;
+	}
+
+ 
 	@CacheEvict(value = "purchasesByUsername", key = "#username")
-	public void cacheEvict(String username) {
+	public void cacheEvictByUsername(String username) {
 
 	}
+	//ppp==peopleWhoPreviouslyPurchasedProduct
+	@CacheEvict(value = "ppp", key = "#productId")
+	public void cacheEvictPpp(String productId) {
+
+	} 
 
 }
 

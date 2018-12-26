@@ -7,43 +7,44 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable; 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.discont.entity.PopularPurchase;
 import com.discont.entity.Product;
 import com.discont.entity.Purchase;
-import com.discont.service.ServiceProducts;
-import com.discont.service.ServicePurchaseByProduct;
-import com.discont.service.ServicePurchaseByUser;
-import com.discont.service.ServiceUsersWhoRecentlyPurchased;
+import com.discont.service.PopularPurchaseService;
+import com.discont.service.ProductService;
+import com.discont.service.PurchaseService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class UserController {
 
-	@Autowired
-	private ServicePurchaseByUser servicePurchasesByUser;
-	@Autowired
-	private ServicePurchaseByProduct purchasesByProductService;
-	@Autowired
-	private ServiceProducts serviceProduct;
-	@Autowired
-	private ServiceUsersWhoRecentlyPurchased service;
+	private PurchaseService purchaseService;
+	private ProductService serviceProduct;
+	private PopularPurchaseService popularPurchaseService;
+
+	public UserController(PurchaseService purchaseService, ProductService serviceProduct,
+			PopularPurchaseService popularPurchaseService) {
+		this.purchaseService = purchaseService;
+		this.serviceProduct = serviceProduct;
+		this.popularPurchaseService = popularPurchaseService;
+	}
 
 	// fetch 5 recent purchases for the user, oreder by date
 	@GetMapping(path = "discont.com/purchases/by-user/{username:.+}")
 	public ArrayList<Purchase> allPurchasesByUser(@PathVariable String username) throws IOException {
 
-		return servicePurchasesByUser.getPurchasesByUsername(username);
+		return purchaseService.getPurchasesByUsername(username);
 
 	}
 
 	// list of all people who previously purchased that product
 	@GetMapping(path = "discont.com/purchases/by-product/{productId}")
-	public ArrayList<Purchase> peopleWhoPreviouslyPurchasedProduct(@PathVariable int productId) {
+	public ArrayList<Purchase> peopleWhoPreviouslyPurchasedProduct(@PathVariable int productId) throws IOException {
 
-		return purchasesByProductService.peopleWhoPreviouslyPurchasedProduct(productId);
+		return purchaseService.peopleWhoPreviouslyPurchasedProduct(productId);
 
 	}
 
@@ -57,7 +58,7 @@ public class UserController {
 	@GetMapping(path = "discont.com/recent-purchases/{username:.+}")
 	public ArrayList<PopularPurchase> recentPurchasesByUsername(@PathVariable String username) {
 
-		return service.usersWhoRecentlyPurchased(username);
+		return popularPurchaseService.usersWhoRecentlyPurchased(username);
 	}
 
 	@GetMapping(path = "discont.com/products")

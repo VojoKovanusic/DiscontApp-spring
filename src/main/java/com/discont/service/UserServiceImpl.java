@@ -12,7 +12,7 @@ import com.discont.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
-public class ServiceUserImpl implements ServiceUser {
+public class UserServiceImpl implements UserService {
 
 	private RestTemplate restTemplate;
 
@@ -20,7 +20,7 @@ public class ServiceUserImpl implements ServiceUser {
 	private String usersByUsernameUrl;
 
 	@Autowired
-	public ServiceUserImpl(RestTemplate restTemplate) {
+	public UserServiceImpl(RestTemplate restTemplate) {
 
 		this.restTemplate = restTemplate;
 	}

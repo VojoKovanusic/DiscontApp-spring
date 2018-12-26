@@ -14,15 +14,14 @@ import com.discont.entity.Product;
 import com.discont.entity.Purchase;
 
 @Service
-public class ServicePopularPurchaseImpl implements ServicePopularPurchase {
+public class PopularPurchaseServiceImpl implements PopularPurchaseService {
 
-	private ServicePurchaseByUser userService;
+	private PurchaseService userService;
 
-	private ServiceProducts serviceProducts;
+	private ProductService serviceProducts;
 
 	@Autowired
-	public ServicePopularPurchaseImpl(ServicePurchaseByUser userService, ServiceProducts serviceProducts) {
-
+	public PopularPurchaseServiceImpl(PurchaseService userService, ProductService serviceProducts) {
 		this.userService = userService;
 		this.serviceProducts = serviceProducts;
 	}
@@ -69,6 +68,33 @@ public class ServicePopularPurchaseImpl implements ServicePopularPurchase {
 		for (Product product : serviceProducts.getAllProducts()) {
 			popularList.add(new PopularPurchase(product));
 		}
+	}
+
+	@Cacheable(value = "popularP", key = "#username")
+	public ArrayList<PopularPurchase> usersWhoRecentlyPurchased(String username) {
+
+		ArrayList<PopularPurchase> buySameProduct = new ArrayList<>();
+
+		for (PopularPurchase popularPurchases : listOfPopularPurchases()) {
+
+			// if there is already a username which bought, I delete it from the list
+			if (isContainsUsername(popularPurchases.getRecentUserNames(), username)) {
+				popularPurchases.getRecentUserNames().remove(username);
+
+				buySameProduct.add((popularPurchases));
+			}
+		}
+		return buySameProduct;
+
+	}
+
+	private boolean isContainsUsername(ArrayList<String> allUsernames, String username) {
+
+		for (String name : allUsernames) {
+			if (name.equals(username))
+				return true;
+		}
+		return false;
 	}
 
 	@CacheEvict("popular")

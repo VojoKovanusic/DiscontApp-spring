@@ -1,7 +1,6 @@
 package com.discont.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +13,7 @@ import com.discont.entity.Product;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
-public class ServiceProductImpl implements ServiceProducts {
+public class ProductServiceImpl implements ProductService {
 	 
 	private RestTemplate restTemplate;
 
@@ -27,7 +26,7 @@ public class ServiceProductImpl implements ServiceProducts {
 	
 	
 	@Autowired
-	public ServiceProductImpl(RestTemplate restTemplate) {
+	public ProductServiceImpl(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
 

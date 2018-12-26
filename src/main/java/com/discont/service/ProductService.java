@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.discont.entity.Product;
 
-public interface ServiceProducts {
+public interface ProductService {
 
 	Product getProductById(int id);
 
