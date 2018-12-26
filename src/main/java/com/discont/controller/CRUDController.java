@@ -16,28 +16,33 @@ import com.discont.service.ProductService;
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 public class CRUDController {
 
-	@Autowired
+ 
 	ProductService productService;
+
+	@Autowired
+	public CRUDController(ProductService productService) {
+		this.productService = productService;
+	}
 
 	@PostMapping(path = "api.discont.com/product")
 	public Product addProduct(@RequestBody Product product) {
-
 		productService.addProduct(product);
-
 		return product;
 	}
 
 	@PutMapping(path = "api.discont.com/product/{id}")
-	public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-
-		productService.updateProduct(id, product);
-
-		return product;
+	public void updateProduct(@PathVariable Long id, @RequestBody Product product) {
+		try {
+			productService.updateProduct(id, product);
+		} catch (NullPointerException e) {
+			 System.out.println(e.getMessage());
+		}
+		
+	 
 	}
 
 	@DeleteMapping(value = "api.discont.com/product/{id}")
 	public void deleteProduct(@PathVariable Long id) {
-
 		productService.deleteProduct(id);
 	}
 

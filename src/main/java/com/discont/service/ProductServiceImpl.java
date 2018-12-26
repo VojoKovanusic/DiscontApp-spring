@@ -1,5 +1,6 @@
 package com.discont.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +15,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	 
-	private RestTemplate restTemplate;
 
+	private RestTemplate restTemplate;
 
 	@Value("${rest.purchase.url.purchase.user}")
 	private String purchaseByuserUrl;
-	
+
 	@Value("${rest.url.products}")
 	private String productsUrl;
-	
-	
+
 	@Autowired
 	public ProductServiceImpl(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
@@ -33,9 +32,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getAllProducts() {
 
-		List<Product> products = 
-				restTemplate.getForObject(productsUrl, HelperProductsClass.class)
-				.getProducts();
+		List<Product> products = restTemplate.getForObject(productsUrl, HelperProductsClass.class).getProducts();
 
 		return products;
 	}
@@ -70,6 +67,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void updateProduct(Long id, Product product) {
+		findProduct(id);
+
 		Product productForModification = findProduct(id);
 		setFacePriceSize(product, productForModification);
 	}
@@ -78,13 +77,26 @@ public class ProductServiceImpl implements ProductService {
 		productForModification.setFace(product.getFace());
 		productForModification.setPrice(product.getPrice());
 		productForModification.setSize(product.getSize());
-
 	}
 
-	private Product findProduct(Long id) {
-		Product modifiedProduct = getAllProducts().stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
-
-		return modifiedProduct;
+	private Product findProduct(Long id) { 
+		try {
+			Product product = 
+				getAllProducts().stream()
+				.filter(p -> p.getId().equals(id))
+				.findFirst().orElse(null);
+ 
+				return product;
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+		}
+		Product product = 
+				getAllProducts().stream()
+				.filter(p -> p.getId().equals(id))
+				.findFirst().orElse(null);
+ 
+				return product;
+		 
 	}
 
 	@Override

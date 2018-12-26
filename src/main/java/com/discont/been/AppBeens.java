@@ -1,4 +1,4 @@
-package com.discont.config;
+package com.discont.been;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
