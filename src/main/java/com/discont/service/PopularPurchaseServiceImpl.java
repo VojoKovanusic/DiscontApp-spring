@@ -1,7 +1,6 @@
 
 package com.discont.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.discont.entity.PopularPurchase;
 import com.discont.entity.Product;
-import com.discont.entity.Purchase;
 
 @Service
 public class PopularPurchaseServiceImpl implements PopularPurchaseService {
