@@ -1,6 +1,5 @@
 package com.discont.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,9 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getAllProducts() {
 
-		List<Product> products = restTemplate.getForObject(productsUrl, HelperProductsClass.class).getProducts();
+		List<Product> products = 
+				restTemplate.getForObject(productsUrl, HelperProductsClass.class)
+				.getProducts();
 
 		return products;
 	}
@@ -40,7 +41,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Cacheable(value = "product", key = "#id")
 	public Product getProductById(int id) {
-		Product product = getAllProducts().stream().filter(user -> user.getId() == id).findFirst().orElse(null);
+		Product product = 
+				getAllProducts().stream()
+				.filter(user -> user.getId() == id)
+				.findFirst().orElse(null);
 
 		return product;
 
@@ -80,23 +84,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	private Product findProduct(Long id) { 
-		try {
 			Product product = 
 				getAllProducts().stream()
 				.filter(p -> p.getId().equals(id))
 				.findFirst().orElse(null);
  
 				return product;
-		} catch (NullPointerException e) {
-			// TODO: handle exception
-		}
-		Product product = 
-				getAllProducts().stream()
-				.filter(p -> p.getId().equals(id))
-				.findFirst().orElse(null);
- 
-				return product;
-		 
+
 	}
 
 	@Override

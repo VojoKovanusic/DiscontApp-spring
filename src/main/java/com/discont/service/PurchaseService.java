@@ -12,7 +12,7 @@ public interface PurchaseService {
 
 	 List<Purchase> getAllPurchases() throws IOException;
 	 
-	 ArrayList<Purchase> peopleWhoPreviouslyPurchasedProduct(int productId)throws IOException;
+	List<Purchase> peopleWhoPreviouslyPurchasedProduct(int productId)throws IOException;
 
 	 
 }

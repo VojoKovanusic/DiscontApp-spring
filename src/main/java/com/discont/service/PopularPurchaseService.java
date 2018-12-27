@@ -6,7 +6,7 @@ import com.discont.entity.PopularPurchase;
 
 public interface PopularPurchaseService {
 	
-	ArrayList<PopularPurchase> listOfPopularPurchases();
+	ArrayList<PopularPurchase> getPopularPurchases();
 	
 	ArrayList<PopularPurchase> usersWhoRecentlyPurchased(String username);
 

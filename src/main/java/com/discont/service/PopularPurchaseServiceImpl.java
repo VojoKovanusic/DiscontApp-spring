@@ -1,3 +1,4 @@
+
 package com.discont.service;
 
 import java.io.IOException;
@@ -28,20 +29,20 @@ public class PopularPurchaseServiceImpl implements PopularPurchaseService {
 
 	@Override
 	@Cacheable("popular")
-	public ArrayList<PopularPurchase> listOfPopularPurchases() {
+	public ArrayList<PopularPurchase> getPopularPurchases() {
 
-		ArrayList<PopularPurchase> popularList = new ArrayList<>();
+		ArrayList<PopularPurchase> popularPurchases = new ArrayList<>();
 
-		fillPopularPurchasesListWhithProducts(popularList);
+		fillPopularPurchasesWhithProducts(popularPurchases);
 
-		addUsernameInPopularPurchase(popularList);
+		addUserNameInPopularPurchases(popularPurchases);
 
-		sortPopularPurchasesList(popularList);
+		sortPopularPurchases(popularPurchases);
 
-		return popularList;
+		return popularPurchases;
 	}
 
-	private void addUsernameInPopularPurchase(ArrayList<PopularPurchase> popularList) {
+	private void addUserNameInPopularPurchases(ArrayList<PopularPurchase> popularList) {
 		for (PopularPurchase popularPurchase : popularList) {
 
 			try {
@@ -53,18 +54,19 @@ public class PopularPurchaseServiceImpl implements PopularPurchaseService {
 				}
 
 			} catch (IOException e) {
-				System.out.println(e);
+				System.out.println(e.getMessage());
 			}
 		}
 	}
 
-	private void sortPopularPurchasesList(ArrayList<PopularPurchase> popularList) {
+	private void sortPopularPurchases(ArrayList<PopularPurchase> popularList) {
 		Collections.sort(popularList, (o1, o2) -> {
-			return Integer.compare(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
+			return Integer.compare
+					(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
 		});
 	}
 
-	private void fillPopularPurchasesListWhithProducts(ArrayList<PopularPurchase> popularList) {
+	private void fillPopularPurchasesWhithProducts(ArrayList<PopularPurchase> popularList) {
 		for (Product product : serviceProducts.getAllProducts()) {
 			popularList.add(new PopularPurchase(product));
 		}
@@ -75,7 +77,7 @@ public class PopularPurchaseServiceImpl implements PopularPurchaseService {
 
 		ArrayList<PopularPurchase> buySameProduct = new ArrayList<>();
 
-		for (PopularPurchase popularPurchases : listOfPopularPurchases()) {
+		for (PopularPurchase popularPurchases : getPopularPurchases()) {
 
 			// if there is already a username which bought, I delete it from the list
 			if (isContainsUsername(popularPurchases.getRecentUserNames(), username)) {

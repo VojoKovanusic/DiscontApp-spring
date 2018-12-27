@@ -25,12 +25,14 @@ public class UserServiceImpl implements UserService {
 		this.restTemplate = restTemplate;
 	}
 
-	@Override
-	public ArrayList<User> getUsers() {
+	@Override 
+	public List<User> getUsers() {
 
-		List<User> usersList = restTemplate.getForObject(usersByUsernameUrl, HelperUserClass.class).getUsers();
+		List<User> users = 
+				restTemplate.getForObject(usersByUsernameUrl, HelperUserClass.class)
+				.getUsers();
 
-		return (ArrayList<User>) usersList;
+		return users;
 
 	}
 
@@ -38,9 +40,11 @@ public class UserServiceImpl implements UserService {
 	public List<String> getUserNames() {
 
 		List<String> names = new ArrayList<>();
-		for (User user : getUsers()) {
-			names.add(user.getUsername());
-		}
+	
+		 getUsers().forEach
+		 (user->
+		 names.add(user.getUsername()));
+
 		return names;
 	}
 

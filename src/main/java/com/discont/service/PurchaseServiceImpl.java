@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,31 +40,34 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	public List<Purchase> getAllPurchases() {
 
-		ArrayList<Purchase> listofAllPurchase = new ArrayList<>();
+		ArrayList<Purchase> allPurchase = new ArrayList<>();
 
 		for (String username : serviceUser.getUserNames()) {
 			String URL = purchaseByUserUrl.replace("{username}", username);
 
 			ArrayList<Purchase> purchasesByUsername = loadPurchasesByUsername(restTemplate, URL);
 
-			loadAllPurchases(listofAllPurchase, purchasesByUsername);
+			loadAllPurchases(allPurchase, purchasesByUsername);
 
 		}
 
-		return listofAllPurchase;
+		return allPurchase;
 
 	}
 
 	private void loadAllPurchases(ArrayList<Purchase> listofAllPurchase, ArrayList<Purchase> purchasesByUsername) {
-		for (Purchase purchas : purchasesByUsername) {
-			listofAllPurchase.add(purchas);
-		}
+		
+		purchasesByUsername.forEach
+		(purchas->
+		listofAllPurchase.add(purchas));
+			
+		
 	}
 
 	private ArrayList<Purchase> loadPurchasesByUsername(RestTemplate restTemplate, String URL) {
-		ArrayList<Purchase> purchasesByUsername = restTemplate.getForObject(URL, HelperPurchasClass.class)
-				.getPurchases();
-		return purchasesByUsername;
+ 
+		return restTemplate.getForObject(URL, HelperPurchasClass.class)
+				.getPurchases(); 
 	}
 
 	@Override
@@ -93,16 +98,15 @@ public class PurchaseServiceImpl implements PurchaseService {
 	
 	@Override
 	@Cacheable(value = "ppp", key = "#productId")
-	public ArrayList<Purchase> peopleWhoPreviouslyPurchasedProduct(int productId) {
+	public List<Purchase> peopleWhoPreviouslyPurchasedProduct(int productId) {
 
-		ArrayList<Purchase> purchase = new ArrayList<>();
+		return
+				getAllPurchases().stream().filter
+				(purchas->purchas.getProductId() == (productId))
+				.collect(Collectors.toList());
 
-		for (Purchase purchas : getAllPurchases()) {
-			if (purchas.getProductId() == (productId)) {
-				purchase.add(purchas);
-			}
-		} 
-		return purchase;
+		
+		 
 	}
 
  

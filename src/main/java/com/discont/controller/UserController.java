@@ -42,7 +42,7 @@ public class UserController {
 
 	// list of all people who previously purchased that product
 	@GetMapping(path = "discont.com/purchases/by-product/{productId}")
-	public ArrayList<Purchase> peopleWhoPreviouslyPurchasedProduct(@PathVariable int productId) throws IOException {
+	public List<Purchase> peopleWhoPreviouslyPurchasedProduct(@PathVariable int productId) throws IOException {
 
 		return purchaseService.peopleWhoPreviouslyPurchasedProduct(productId);
 
