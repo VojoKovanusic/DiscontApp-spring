@@ -43,26 +43,21 @@ public class PopularPurchaseServiceImpl implements PopularPurchaseService {
 	}
 
 	private void addUserNameInPopularPurchases(ArrayList<PopularPurchase> popularList) {
-		for (PopularPurchase popularPurchase : popularList) {
+		popularList.forEach(popularPurchase -> addUserNameInPopularPurchas(popularPurchase));
 
-			try {
-				for (Purchase purchas : userService.getAllPurchases()) {
+	}
 
-					if (popularPurchase.getProduct().getId() == (purchas.getProductId())) {
-						popularPurchase.getRecentUserNames().add(purchas.getUsername());
-					}
-				}
-
-			} catch (IOException e) {
-				System.out.println(e.getMessage());
-			}
-		}
+	private void addUserNameInPopularPurchas(PopularPurchase popularPurchase) {
+		userService.getAllPurchases().stream()
+				.filter(purchas -> popularPurchase.getProduct().getId() == (purchas.getProductId()))
+				.forEach((purchas) -> {
+					popularPurchase.getRecentUserNames().add(purchas.getUsername());
+				});
 	}
 
 	private void sortPopularPurchases(ArrayList<PopularPurchase> popularList) {
 		Collections.sort(popularList, (o1, o2) -> {
-			return Integer.compare
-					(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
+			return Integer.compare(o2.getRecentUserNames().size(), o1.getRecentUserNames().size());
 		});
 	}
 

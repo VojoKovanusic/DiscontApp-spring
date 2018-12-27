@@ -10,7 +10,7 @@ public interface PurchaseService {
 
 	 ArrayList<Purchase> getPurchasesByUsername(String username) throws IOException;
 
-	 List<Purchase> getAllPurchases() throws IOException;
+	 List<Purchase> getAllPurchases() ;
 	 
 	List<Purchase> peopleWhoPreviouslyPurchasedProduct(int productId)throws IOException;
 
