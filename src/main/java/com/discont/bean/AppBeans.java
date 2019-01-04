@@ -1,11 +1,11 @@
-package com.discont.been;
+package com.discont.bean;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class AppBeens {
+public class AppBeans {
 
 	@Bean
 	RestTemplate restTemplateFactory() {
